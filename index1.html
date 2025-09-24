@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>AImpress - Workshops, Coaching & Development</title> <link rel="stylesheet" href="css/styles.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> </head> <body> <!-- Navigation --> <nav class="navbar"> <div class="nav-container"> <div class="nav-logo">
+      <a href="#home">
+        <img src="images/aimpress.png" alt="AImpress Logo" class="logo-img">
+      </a>
+    </div> <ul class="nav-menu"> <li><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li> <li><a href="#services" class="nav-link" data-translate="nav.services">Services</a></li> <li><a href="#workshops" class="nav-link" data-translate="nav.workshops">Workshops</a></li> <li><a href="#about" class="nav-link" data-translate="nav.about">About</a></li> <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li> <li class="lang-switch"> <button class="lang-option active" data-lang="en">EN</button> <span class="lang-separator">|</span> <button class="lang-option" data-lang="de">DE</button> </li> <li><a href="#appointment" class="nav-link cta-button" data-translate="nav.book">Book Session</a></li> </ul> <div class="hamburger"> <span></span> <span></span> <span></span> </div> </div> </nav>
+
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title" data-translate="hero.title">Transform Your Business with AI</h1>
+        <p class="hero-subtitle" data-translate="hero.subtitle">Expert workshops, personalized coaching, and custom AI solutions to accelerate your digital transformation</p>
+        <div class="hero-buttons">
+            <a href="#appointment" class="btn btn-primary" data-translate="hero.cta1">Schedule Consultation</a>
+            <a href="#services" class="btn btn-secondary" data-translate="hero.cta2">Our Services</a>
+        </div>
+    </div>
+    
+    <div class="hero-visual">
+        <div class="floating-elements">
+            <div class="element element-1"></div>
+            <div class="element element-2"></div>
+            <div class="element element-3"></div>
+        </div>
+    </div>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video id="bgVideo" autoplay muted loop playsinline>
+            <source src="https://edge-ams-1.kinescopecdn.net/66129b27-9cf2-462e-960c-84c26768e87a/videos/e7110d4d-bb55-4803-9f81-e4a78374cfcb/mp4/0193aa99-d1ff-7df1-bf37-bec219da9d97.mp4#t=0.001" type="video/mp4">
+            Your browser does not support the HTML5 video tag.
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services">
+    <div class="container">
+        <h2 class="section-title" data-translate="services.title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 data-translate="services.workshops.title">AI Workshops</h3>
+                <p data-translate="services.workshops.desc">Interactive workshops covering machine learning, automation, and AI implementation strategies for businesses of all sizes.</p>
+                <ul class="service-features">
+                    <li data-translate="services.workshops.feature1">Hands-on learning experience</li>
+                    <li data-translate="services.workshops.feature2">Industry-specific use cases</li>
+                    <li data-translate="services.workshops.feature3">Certificate of completion</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 data-translate="services.coaching.title">AI Coaching</h3>
+                <p data-translate="services.coaching.desc">One-on-one coaching sessions to help you develop AI strategies, implement solutions, and overcome technical challenges.</p>
+                <ul class="service-features">
+                    <li data-translate="services.coaching.feature1">Personalized guidance</li>
+                    <li data-translate="services.coaching.feature2">Strategic planning</li>
+                    <li data-translate="services.coaching.feature3">Ongoing support</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 data-translate="services.development.title">AI Development</h3>
+                <p data-translate="services.development.desc">Custom AI solutions tailored to your specific business needs, from chatbots to predictive analytics systems.</p>
+                <ul class="service-features">
+                    <li data-translate="services.development.feature1">Custom development</li>
+                    <li data-translate="services.development.feature2">Integration support</li>
+                    <li data-translate="services.development.feature3">Maintenance & updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workshops Section -->
+<section id="workshops" class="workshops">
+    <div class="container">
+        <h2 class="section-title" data-translate="workshops.title">Upcoming Workshops</h2>
+        <div class="workshops-grid">
+            <div class="workshop-card">
+                <div class="workshop-image">
+                    <div class="workshop-date">
+                        <span class="day">15</span>
+                        <span class="month" data-translate="workshops.sep">Sep</span>
+                    </div>
+                </div>
+                <div class="workshop-content">
+                    <h3 data-translate="workshops.workshop1.title">Introduction to Machine Learning</h3>
+                    <p data-translate="workshops.workshop1.desc">Learn the fundamentals of ML algorithms and their practical applications in business environments.</p>
+                    <div class="workshop-meta">
+                        <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop1.duration">3 hours</span></span>
+                        <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop1.participants">Max 20 participants</span></span>
+                        <span><i class="fas fa-euro-sign"></i> €199</span>
+                    </div>
+                    <a href="#appointment" class="btn btn-outline" data-translate="workshops.register">Register Now</a>
+                </div>
+            </div>
+            <div class="workshop-card">
+                <div class="workshop-image">
+                    <div class="workshop-date">
+                        <span class="day">22</span>
+                        <span class="month" data-translate="workshops.sep">Sep</span>
+                    </div>
+                </div>
+                <div class="workshop-content">
+                    <h3 data-translate="workshops.workshop2.title">AI for Business Automation</h3>
+                    <p data-translate="workshops.workshop2.desc">Discover how to automate business processes using AI tools and increase operational efficiency.</p>
+                    <div class="workshop-meta">
+                        <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop2.duration">4 hours</span></span>
+                        <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop2.participants">Max 15 participants</span></span>
+                        <span><i class="fas fa-euro-sign"></i> €299</span>
+                    </div>
+                    <a href="#appointment" class="btn btn-outline" data-translate="workshops.register">Register Now</a>
+                </div>
+            </div>
+            <div class="workshop-card">
+                <div class="workshop-image">
+                    <div class="workshop-date">
+                        <span class="day">29</span>
+                        <span class="month" data-translate="workshops.sep">Sep</span>
+                    </div>
+                </div>
+                <div class="workshop-content">
+                    <h3 data-translate="workshops.workshop3.title">Building AI Chatbots</h3>
+                    <p data-translate="workshops.workshop3.desc">Hands-on workshop to create intelligent chatbots for customer service and lead generation.</p>
+                    <div class="workshop-meta">
+                        <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop3.duration">5 hours</span></span>
+                        <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop3.participants">Max 12 participants</span></span>
+                        <span><i class="fas fa-euro-sign"></i> €399</span>
+                    </div>
+                    <a href="#appointment" class="btn btn-outline" data-translate="workshops.register">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title" data-translate="about.title">About AImpress</h2>
+                <p data-translate="about.desc">We are a team of AI experts passionate about helping businesses harness the power of artificial intelligence. With over 10 years of combined experience in machine learning, data science, and business automation, we provide practical, results-driven AI solutions.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p data-translate="about.stat1">Clients Served</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p data-translate="about.stat2">Workshops Delivered</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p data-translate="about.stat3">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="tech-stack">
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">TensorFlow</div>
+                    <div class="tech-item">OpenAI</div>
+                    <div class="tech-item">AWS</div>
+                    <div class="tech-item">Azure</div>
+                    <div class="tech-item">React</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Appointment Section -->
+<section id="appointment" class="appointment">
+    <div class="container">
+        <h2 class="section-title" data-translate="appointment.title">Book Your Session</h2>
+        <div class="appointment-content">
+            <div class="appointment-info">
+                <h3 data-translate="appointment.ready">Ready to get started?</h3>
+                <p data-translate="appointment.desc">Schedule a consultation or book a workshop slot using our integrated calendar system.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+43 123 456 7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@aisolutionshub.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-translate="appointment.location">Gruentalerstraße 4, 4020 Linz</span>
+                    </div>
+                </div>
+            </div>
+            <div class="calendar-container">
+                <div id="calendar-widget" class="calendar-widget">
+                    <div class="calendar-header">
+                        <h4 data-translate="appointment.select">Select a Date & Time</h4>
+                        <div class="calendar-controls">
+                            <button id="prev-month" class="calendar-btn">&lt;</button>
+                            <span id="current-month"></span>
+                            <button id="next-month" class="calendar-btn">&gt;</button>
+                        </div>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid"></div>
+                    <div id="time-slots" class="time-slots" style="display: none;">
+                        <h5 data-translate="appointment.available">Available Times</h5>
+                        <div id="slots-container"></div>
+                    </div>
+                    <button id="google-calendar-btn" class="btn btn-primary" style="display: none;">
+                        <i class="fab fa-google"></i> <span data-translate="appointment.add">Add to Google Calendar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-form">
+                <h3 data-translate="contact.title">Get in Touch</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required data-translate-placeholder="contact.name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required data-translate-placeholder="contact.email">
+                    </div>
+                    <div class="form-group">
+                        <select id="service" name="service" required>
+                            <option value="" data-translate="contact.select">Select a Service</option>
+                            <option value="workshop" data-translate="contact.workshop">Workshop</option>
+                            <option value="coaching" data-translate="contact.coaching">1-on-1 Coaching</option>
+                            <option value="development" data-translate="contact.development">AI Development</option>
+                            <option value="consultation" data-translate="contact.consultation">Consultation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Tell us about your project or questions" rows="5" required data-translate-placeholder="contact.message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-translate="contact.send">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-map">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p data-translate="contact.map">Gruentalerstraße 4, 4020 Linz</p>
+                    <!-- Google Map Embed -->
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.1273792660321!2d14.286192379099496!3d48.27401582378681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773bc559a5d6f79%3A0x3ab2a4cc064e4aea!2sGr%C3%BCntalerstra%C3%9Fe%204%2C%204020%20Linz%2C%20Austria!5e0!3m2!1sen!2sat!4v1696932000000!5m2!1sen!2sat"
+          width="200%"
+          height="500"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AImpress</h4>
+                <p data-translate="footer.desc">Transforming businesses through AI innovation and education.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="footer.services">Services</h4>
+                <ul>
+                    <li><a href="#services" data-translate="footer.workshops">AI Workshops</a></li>
+                    <li><a href="#services" data-translate="footer.coaching">AI Coaching</a></li>
+                    <li><a href="#services" data-translate="footer.development">AI Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="footer.contact">Contact</h4>
+                <p data-translate="footer.email">Email: info@aisolutionshub.com</p>
+                <p data-translate="footer.phone">Phone: +43 123 456 7890</p>
+                <p data-translate="footer.location">Location: Gruentalerstraße 4, 4020 Linz</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AImpress. <span data-translate="footer.rights">All rights reserved.</span></p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/animations.js"></script>
