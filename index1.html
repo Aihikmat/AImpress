@@ -1,9 +1,15 @@
-<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>AImpress - Workshops, Coaching & Development</title> <link rel="stylesheet" href="css/styles.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> </head> <body> <!-- Navigation --> <nav class="navbar"> <div class="nav-container"> <div class="nav-logo">
+<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>AImpress - Workshops, Coaching & Development</title> 
+    <link rel="stylesheet" href="css/styles.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ 
+  </head>
+   <body> <!-- Navigation --> <nav class="navbar"> <div class="nav-container"> <div class="nav-logo">
       <a href="#home">
         <img src="images/aimpress.png" alt="AImpress Logo" class="logo-img">
       </a>
     </div> <ul class="nav-menu"> <li><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li> <li><a href="#services" class="nav-link" data-translate="nav.services">Services</a></li> <li><a href="#workshops" class="nav-link" data-translate="nav.workshops">Workshops</a></li> <li><a href="#about" class="nav-link" data-translate="nav.about">About</a></li> <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li> <li class="lang-switch"> <button class="lang-option active" data-lang="en">EN</button> <span class="lang-separator">|</span> <button class="lang-option" data-lang="de">DE</button> </li> <li><a href="#appointment" class="nav-link cta-button" data-translate="nav.book">Book Session</a></li> </ul> <div class="hamburger"> <span></span> <span></span> <span></span> </div> </div> </nav>
 
+    
 
 <!-- Hero Section -->
 <section id="home" class="hero">
@@ -250,7 +256,11 @@
                         <textarea id="message" name="message" placeholder="Tell us about your project or questions" rows="5" required data-translate-placeholder="contact.message"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" data-translate="contact.send">Send Message</button>
-                </form>
+</form> 
+
+<!-- feedback text -->
+<p id="form-response"></p>
+
             </div>
             <div class="contact-map">
                 <div class="map-placeholder">
