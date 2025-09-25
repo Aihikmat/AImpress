@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import { initializeRoutes } from './routes/mainRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -31,13 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Serve static files from public directory
-app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve the main HTML file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index1.html'));
-});
+// Initialize routes
+const mainRoutes = initializeRoutes(supabase);
+app.use('/', mainRoutes);
 
 // Test Supabase connection
 async function testSupabaseConnection() {
@@ -59,78 +58,6 @@ async function testSupabaseConnection() {
 
 // Initialize and test connection
 testSupabaseConnection();
-
-// Handle form submission
-app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, service, message } = req.body;
-
-    // Validate required fields
-    if (!name || !email || !service || !message) {
-      return res.status(400).json({
-        success: false,
-        msg: "All fields are required"
-      });
-    }
-
-    // Insert into Supabase
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert([
-        {
-          name: name,
-          email: email,
-          service: service,
-          message: message
-        }
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return res.status(500).json({
-        success: false,
-        msg: "Database error: " + error.message
-      });
-    }
-
-    console.log("Contact form submitted:", { name, email, service });
-    console.log("Supabase response:", data);
-
-    // Return JSON response as expected by the frontend
-    res.json({
-      success: true,
-      msg: "Thank you! Your message has been sent successfully."
-    });
-
-  } catch (error) {
-    console.error("Error saving contact:", error);
-    res.status(500).json({
-      success: false,
-      msg: "An error occurred while sending your message. Please try again."
-    });
-  }
-});
-
-// Optional: Add an endpoint to view submitted contacts (for testing)
-app.get("/contacts", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from('contacts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error("Error fetching contacts:", error);
-      return res.status(500).json({ error: "Failed to fetch contacts: " + error.message });
-    }
-
-    res.json(data);
-  } catch (error) {
-    console.error("Error fetching contacts:", error);
-    res.status(500).json({ error: "Failed to fetch contacts" });
-  }
-});
 
 // Start server
 app.listen(PORT, () => {

@@ -1,13 +1,43 @@
-<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>AImpress - Workshops, Coaching & Development</title> 
-    <link rel="stylesheet" href="css/styles.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
- 
-  </head>
-   <body> <!-- Navigation --> <nav class="navbar"> <div class="nav-container"> <div class="nav-logo">
-      <a href="#home">
-        <img src="images/aimpress.png" alt="AImpress Logo" class="logo-img">
-      </a>
-    </div> <ul class="nav-menu"> <li><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li> <li><a href="#services" class="nav-link" data-translate="nav.services">Services</a></li> <li><a href="#workshops" class="nav-link" data-translate="nav.workshops">Workshops</a></li> <li><a href="#about" class="nav-link" data-translate="nav.about">About</a></li> <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li> <li class="lang-switch"> <button class="lang-option active" data-lang="en">EN</button> <span class="lang-separator">|</span> <button class="lang-option" data-lang="de">DE</button> </li> <li><a href="#appointment" class="nav-link cta-button" data-translate="nav.book">Book Session</a></li> </ul> <div class="hamburger"> <span></span> <span></span> <span></span> </div> </div> </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AImpress - Workshops, Coaching & Development</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="#home">
+            <img src="/images/aimpress.png" alt="AImpress Logo" class="logo-img">
+          </a>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li>
+          <li><a href="#services" class="nav-link" data-translate="nav.services">Services</a></li>
+          <li><a href="#workshops" class="nav-link" data-translate="nav.workshops">Workshops</a></li>
+          <li><a href="#about" class="nav-link" data-translate="nav.about">About</a></li>
+          <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li>
+          <li class="lang-switch">
+            <button class="lang-option active" data-lang="en">EN</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-option" data-lang="de">DE</button>
+          </li>
+          <li><a href="#appointment" class="nav-link cta-button" data-translate="nav.book">Book Session</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
 
     
 
@@ -255,8 +285,8 @@
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Tell us about your project or questions" rows="5" required data-translate-placeholder="contact.message"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-translate="contact.send">Send Message</button>
-</form> 
+                    <button type="button" class="btn btn-primary send_btn" data-translate="contact.send">Send Message</button>
+</form>
 
 <!-- feedback text -->
 <p id="form-response"></p>
@@ -267,17 +297,15 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <p data-translate="contact.map">Gruentalerstraße 4, 4020 Linz</p>
                     <!-- Google Map Embed -->
-      <div class="contact-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.1273792660321!2d14.286192379099496!3d48.27401582378681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773bc559a5d6f79%3A0x3ab2a4cc064e4aea!2sGr%C3%BCntalerstra%C3%9Fe%204%2C%204020%20Linz%2C%20Austria!5e0!3m2!1sen!2sat!4v1696932000000!5m2!1sen!2sat"
-          width="200%"
-          height="500"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.1273792660321!2d14.286192379099496!3d48.27401582378681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773bc559a5d6f79%3A0x3ab2a4cc064e4aea!2sGr%C3%BCntalerstra%C3%9Fe%204%2C%204020%20Linz%2C%20Austria!5e0!3m2!1sen!2sat!4v1696932000000!5m2!1sen!2sat"
+                      width="100%"
+                      height="400"
+                      style="border:0;"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -318,6 +346,31 @@
     </div>
 </footer>
 
-<script src="js/main.js"></script>
-<script src="js/calendar.js"></script>
-<script src="js/animations.js"></script>
+<script src="/js/translations.js"></script>
+<script src="/js/modules/navigation.js"></script>
+<script src="/js/modules/video.js"></script>
+<script src="/js/modules/form.js"></script>
+<script src="/js/modules/animations.js"></script>
+<script src="/js/modules/language.js"></script>
+<script src="/js/calendar.js"></script>
+<script>
+    // Initialize all modules when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize navigation
+        new Navigation();
+        
+        // Initialize video handler
+        new VideoHandler();
+        
+        // Initialize form handler
+        new FormHandler();
+        
+        // Initialize animations
+        new Animations();
+        
+        // Initialize language switcher
+        new LanguageSwitcher();
+    });
+</script>
+</body>
+</html>
