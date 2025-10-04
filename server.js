@@ -1,10 +1,12 @@
+
+
 import express from "express";
 import bodyParser from "body-parser";
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { initializeRoutes } from './routes/mainRoutes.js';
+import { initializeRoutes } from "./routes/mainRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -14,14 +16,14 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+  console.log("Please set SUPABASE_URL and SUPABASE_ANON_KEY in your .env file", PORT);
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing Supabase environment variables!');
-  console.log('Please set SUPABASE_URL and SUPABASE_ANON_KEY in your .env file');
+  console.error("Missing Supabase environment variables!");
+  console.log("Please set SUPABASE_URL and SUPABASE_ANON_KEY in your .env file");
   process.exit(1);
 }
 
@@ -30,34 +32,36 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json()); // needed for Clerk + SendGrid
 
 // Serve static files from public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-// Initialize routes
+// Initialize Supabase routes
 const mainRoutes = initializeRoutes(supabase);
-app.use('/', mainRoutes);
+app.use("/", mainRoutes);
 
 // Test Supabase connection
 async function testSupabaseConnection() {
   try {
-    const { data, error } = await supabase
-      .from('contacts')
-      .select('count', { count: 'exact', head: true });
-    
+    const { error } = await supabase
+      .from("contacts")
+      .select("count", { count: "exact", head: true });
+
     if (error) {
-      console.log('Supabase table not found or accessible. Make sure to create the contacts table.');
-      console.log('Error:', error.message);
+      console.log(
+        "Supabase table not found or accessible. Make sure to create the contacts table."
+      );
+      console.log("Error:", error.message);
     } else {
-      console.log('Supabase connection successful');
+      console.log("Supabase connection successful");
     }
-  } catch (error) {
-    console.error('Supabase connection failed:', error);
+  } catch (err) {
+    console.error("Supabase connection failed:", err);
   }
 }
-
-// Initialize and test connection
 testSupabaseConnection();
+
 
 // Start server
 app.listen(PORT, () => {
