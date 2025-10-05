@@ -1,7 +1,5 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
 // Initialize Supabase client
-const supabase = createClient("https://rdqzljpynbpjyvstgain.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkcXpsanB5bmJwanl2c3RnYWluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MjEyODIsImV4cCI6MjA3NDM5NzI4Mn0.xcCxyptcmZGIvXLvNyAQ9VBmsQ9PoRaGlZglXVdhxAI");
+let supabase;
 
 
 // Form Module
@@ -13,7 +11,24 @@ class FormHandler {
         this.init();
     }
 
-    init() {
+    async init() {
+        // Fetch environment variables
+        try {
+            const response = await fetch('/api/config');
+            const config = await response.json();
+            
+            // Initialize Supabase client with environment variables
+            const { createClient } = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
+            supabase = createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error("Failed to load environment variables:", error);
+            // Show an error to the user if env vars are not available
+            if (this.responseEl) {
+                this.responseEl.textContent = "❌ Configuration error. Please contact support.";
+                this.responseEl.style.color = "red";
+            }
+        }
+        
         if (this.form && this.sendBtn && this.responseEl) {
             this.setupFormSubmission();
         } else {
@@ -24,6 +39,13 @@ class FormHandler {
     setupFormSubmission() {
         this.sendBtn.addEventListener("click", async (e) => {
             e.preventDefault();
+
+            // Check if Supabase is initialized
+            if (!supabase) {
+                this.responseEl.textContent = "❌ Configuration error. Please contact support.";
+                this.responseEl.style.color = "red";
+                return;
+            }
 
             // Show loading state
             this.responseEl.textContent = "Sending message...";
@@ -51,9 +73,13 @@ class FormHandler {
 
                 // 2. Send confirmation email with EmailJS
                 try {
+                    // Fetch EmailJS config
+                    const response = await fetch('/api/config');
+                    const config = await response.json();
+                    
                     await emailjs.send(
-                        "service_02oh34n",      // Your EmailJS service ID
-                        "template_pmhl1b5", // Your EmailJS template ID for contact form
+                        config.EMAILJS_SERVICE_ID,      // Your EmailJS service ID
+                        config.EMAILJS_TEMPLATE_CONTACT, // Your EmailJS template ID for contact form
                         {
                             name: formData.name,
                             email: formData.email,
@@ -61,7 +87,7 @@ class FormHandler {
                             message: formData.message,
                             // Add any additional fields your template expects
                         },
-                        "RTcCPe5HnNYWL0IlB"     // Your EmailJS public key
+                        config.EMAILJS_PUBLIC_KEY     // Your EmailJS public key
                     );
 
                     // Success - both Supabase and EmailJS worked

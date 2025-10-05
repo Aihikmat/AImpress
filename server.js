@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import bodyParser from "body-parser";
 import { createClient } from "@supabase/supabase-js";
@@ -16,7 +14,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-  console.log("Please set SUPABASE_URL and SUPABASE_ANON_KEY in your .env file", PORT);
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
@@ -32,7 +30,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.json()); // needed for Clerk + SendGrid
+app.use(express.json());
 
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, "public")));
@@ -62,8 +60,24 @@ async function testSupabaseConnection() {
 }
 testSupabaseConnection();
 
+// Function to start server on a specific port
+function startServer(port) {
+  const server = app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+
+  // Handle EADDRINUSE error
+  server.on('error', (e) => {
+    if (e.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is busy, trying ${port + 1}`);
+      startServer(port + 1);
+    } else {
+      console.error(e);
+    }
+  });
+
+  return server;
+}
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+startServer(PORT);

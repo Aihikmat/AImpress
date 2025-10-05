@@ -1,14 +1,26 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-const supabase = createClient("https://rdqzljpynbpjyvstgain.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkcXpsanB5bmJwanl2c3RnYWluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MjEyODIsImV4cCI6MjA3NDM5NzI4Mn0.xcCxyptcmZGIvXLvNyAQ9VBmsQ9PoRaGlZglXVdhxAI");
-
-
-
+let supabase;
 
 // ✅ DOM elements
 const registrationForm = document.getElementById("registrationForm");
 const workshopInput = document.getElementById("workshopInput");
 const form = document.getElementById("workshopForm");
+
+// Initialize Supabase client
+async function initSupabase() {
+    try {
+        const response = await fetch('/api/config');
+        const config = await response.json();
+        
+        const { createClient } = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
+        supabase = createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+    } catch (error) {
+        console.error("Failed to load environment variables:", error);
+        // Show an error to the user if env vars are not available
+        alert("❌ Configuration error. Please contact support.");
+    }
+}
+
+initSupabase();
 
 // ✅ Register button click → open form
 document.querySelectorAll(".register-btn").forEach((button) => {
@@ -24,6 +36,12 @@ document.querySelectorAll(".register-btn").forEach((button) => {
 // ✅ Handle form submit
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  // Check if Supabase is initialized
+  if (!supabase) {
+    alert("❌ Configuration error. Please contact support.");
+    return;
+  }
 
   const data = {
     workshop: workshopInput.value,
@@ -46,9 +64,13 @@ form.addEventListener("submit", async (e) => {
 
   // 2. Send confirmation email with EmailJS
   try {
+    // Fetch EmailJS config
+    const response = await fetch('/api/config');
+    const config = await response.json();
+    
     emailjs.send(
-      "service_02oh34n",      // ✅ Your EmailJS service ID
-      "template_1xcui47",     // ✅ Your EmailJS template ID
+      config.EMAILJS_SERVICE_ID,      // ✅ Your EmailJS service ID
+      config.EMAILJS_TEMPLATE_REGISTRATION,     // ✅ Your EmailJS template ID
       {
         name: `${data.first_name} ${data.last_name}`,
         email: data.email,
@@ -56,7 +78,7 @@ form.addEventListener("submit", async (e) => {
         dob: data.dob,
         address: data.address,
       },
-      "RTcCPe5HnNYWL0IlB"     // ✅ Your EmailJS public key
+      config.EMAILJS_PUBLIC_KEY     // ✅ Your EmailJS public key
     )
     .then(() => {
       alert("✅ Registration submitted! You'll receive a confirmation email soon.");
@@ -84,4 +106,3 @@ registrationForm.addEventListener("click", (e) => {
     registrationForm.style.display = "none";
   }
 });
-

@@ -24,6 +24,18 @@ export function initializeRoutes(supabaseClient) {
     res.sendFile(path.join(__dirname, '../views/users_messages.html'));
   });
 
+  // API endpoint to provide environment variables to frontend
+  router.get('/api/config', (req, res) => {
+    res.json({
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_CONTACT: process.env.EMAILJS_TEMPLATE_CONTACT,
+      EMAILJS_TEMPLATE_REGISTRATION: process.env.EMAILJS_TEMPLATE_REGISTRATION,
+      EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY
+    });
+  });
+
   // Handle form submission
   router.post("/contact", async (req, res) => {
     try {
