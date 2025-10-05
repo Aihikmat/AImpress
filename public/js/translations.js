@@ -147,7 +147,6 @@ const translations = {
         'workshops.workshop3.desc': 'Praktischer Workshop zur Erstellung intelligenter Chatbots für Kundenservice und Lead-Generierung.',
         'workshops.workshop3.duration': '5 Stunden',
         'workshops.workshop3.participants': 'Max. 12 Teilnehmer',
-        
         'workshops.register': 'Jetzt anmelden',
         
         // About Section
