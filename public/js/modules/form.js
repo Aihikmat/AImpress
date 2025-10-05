@@ -3,6 +3,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 // Initialize Supabase client
 const supabase = createClient("https://rdqzljpynbpjyvstgain.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkcXpsanB5bmJwanl2c3RnYWluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MjEyODIsImV4cCI6MjA3NDM5NzI4Mn0.xcCxyptcmZGIvXLvNyAQ9VBmsQ9PoRaGlZglXVdhxAI");
 
+
 // Form Module
 class FormHandler {
     constructor() {

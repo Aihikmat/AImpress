@@ -98,3 +98,21 @@ export function initializeRoutes(supabaseClient) {
   
   return router;
 }
+
+// Add these routes INSIDE the initializeRoutes function, before the return statement
+router.get('/impressum', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/impressum.html'));
+});
+
+router.get('/datenschutz', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/datenschutz.html'));
+});
+
+router.get('/abg', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/abg.html'));
+});
+
+
+router.get('/index.html', (req, res) => {
+  res.redirect('/');
+});

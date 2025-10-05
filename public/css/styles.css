@@ -529,7 +529,7 @@ transition: all 0.3s ease;
 }
 
 .tech-item:hover {
-transform: translateY(-5px);
+transform: translateY(-2px);
 box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
 }
 
@@ -1978,6 +1978,50 @@ padding: 0 1rem;
   color: #2c3e50; /* dark text for emphasis */
 }
 
+
+
+.footer-links {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  color: #aaa;
+  text-decoration: none;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+
+
+.legal-page {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+  line-height: 1.6;
+  color: #eee;
+  background-color: #121212;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(255,255,255,0.05);
+}
+
+.legal-page h1, .legal-page h2 {
+  color: #fff;
+}
+
+.legal-page p {
+  margin-bottom: 12px;
+}
+
+.legal-page .btn {
+  display: inline-block;
+  margin-top: 20px;
+}
 
 
 

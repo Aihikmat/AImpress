@@ -131,7 +131,7 @@ const translations = {
         
         // About Section
         'about.title': 'About AImpress',
-        'about.desc': 'We are a team of AI experts passionate about helping businesses harness the power of artificial intelligence. With over 10 years of combined experience in machine learning, data science, and business automation, we provide practical, results-driven AI solutions.',
+        'about.desc': 'We founded this AI agency as a team of passionate AI master´s graduates with one goal: to make AI practical and accessible for businesses. We believe AI can streamline processes, boost efficiency, and drive innovation—benefits that should be available to companies of all sizes, not just tech giants.',
         'about.stat1': 'Clients Served',
         'about.stat2': 'Workshops Delivered',
         'about.stat3': 'Client Satisfaction',
@@ -166,7 +166,7 @@ const translations = {
         'footer.development': 'AI Development',
         'footer.contact': 'Contact',
         'footer.email': 'Email: info@aisolutionshub.com',
-        'footer.phone': 'Phone: +43 123 456 7890',
+        'footer.phone': 'Phone: +43 676 5250681',
         'footer.location': 'Location:    4020 Linz',
         'footer.rights': 'All rights reserved.'
     },
@@ -301,7 +301,7 @@ const translations = {
         
         // About Section
         'about.title': 'Über AImpress',
-        'about.desc': 'Wir sind ein Team von KI-Experten, das leidenschaftlich daran arbeitet, Unternehmen dabei zu helfen, die Kraft der künstlichen Intelligenz zu nutzen. Mit über 10 Jahren kombinierter Erfahrung in maschinellem Lernen, Data Science und Geschäftsautomatisierung bieten wir praktische, ergebnisorientierte KI-Lösungen.',
+        'about.desc': 'Wir haben diese KI-Agentur als engagiertes Team von KI-Masterabsolventen gegründet – mit dem Ziel, künstliche Intelligenz für Unternehmen praktisch nutzbar und zugänglich zu machen. KI kann Prozesse optimieren, Effizienz steigern und Innovation fördern – und das sollte jedem Unternehmen möglich sein, nicht nur den Tech-Giganten.',
         'about.stat1': 'Kunden betreut',
         'about.stat2': 'Workshops durchgeführt',
         'about.stat3': 'Kundenzufriedenheit',
@@ -336,7 +336,7 @@ const translations = {
         'footer.development': 'KI-Entwicklung',
         'footer.contact': 'Kontakt',
         'footer.email': 'E-Mail: info@aisolutionshub.com',
-        'footer.phone': 'Telefon: +43 123 456 7890',
+        'footer.phone': 'Telefon: +43 676 5250681',
         'footer.location': 'Standort:    4020 Linz',
         'footer.rights': 'Alle Rechte vorbehalten.'
     }
