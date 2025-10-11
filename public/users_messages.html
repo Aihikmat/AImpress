@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages - AImpress</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="/#home">
+            <img src="/images/aimpress.png" alt="AImpress Logo" class="logo-img">
+          </a>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="/#home" class="nav-link">Home</a></li>
+          <li><a href="/#services" class="nav-link">Services</a></li>
+          <li><a href="/#workshops" class="nav-link">Workshops</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Messages Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Messages</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3>All Submitted Messages</h3>
+                    <div id="messages-container">
+                        <p>Loading messages...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AImpress</h4>
+                    <p>Transforming businesses through AI innovation and education.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/#services">AI Workshops</a></li>
+                        <li><a href="/#services">AI Coaching</a></li>
+                        <li><a href="/#services">AI Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@aisolutionshub.com</p>
+                    <p>Phone: +43 123 456 7890</p>
+                    <p>Location: Gruentalerstraße 4, 4020 Linz</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AImpress. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fetch messages from the server
+        async function fetchMessages() {
+            try {
+                const response = await fetch('/api/contacts');
+                const messages = await response.json();
+                
+                const container = document.getElementById('messages-container');
+                
+                if (messages.length === 0) {
+                    container.innerHTML = '<p>No messages found.</p>';
+                    return;
+                }
+                
+                // Create HTML for messages
+                let messagesHTML = '<div class="messages-list">';
+                messages.forEach(message => {
+                    const date = message.created_at ? new Date(message.created_at).toLocaleString() : 'Unknown date';
+                    messagesHTML += `
+                        <div class="message-card">
+                            <div class="message-header">
+                                <h4>${message.name || 'Anonymous'}</h4>
+                                <span class="message-date">${date}</span>
+                            </div>
+                            <div class="message-details">
+                                <p><strong>Email:</strong> ${message.email || 'Not provided'}</p>
+                                <p><strong>Service:</strong> ${message.service || 'Not specified'}</p>
+                            </div>
+                            <div class="message-content">
+                                <p><strong>Message:</strong></p>
+                                <p>${message.message || 'No message content'}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                messagesHTML += '</div>';
+                
+                container.innerHTML = messagesHTML;
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+                document.getElementById('messages-container').innerHTML = '<p>Error loading messages. Please try again later.</p>';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchMessages();
+        });
+    </script>
+
+    <style>
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .message-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #667eea;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message-header h4 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .message-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .message-details {
+            margin-bottom: 1rem;
+        }
+        
+        .message-details p {
+            margin: 0.3rem 0;
+            color: #555;
+        }
+        
+        .message-content p:first-child {
+            margin-top: 0;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .nav-link.active {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+    </style>
+</body>
+</html>

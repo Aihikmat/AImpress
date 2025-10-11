@@ -28,24 +28,24 @@ class Animations {
             });
         });
         
-        // Typing animation for hero title
-        const heroTitle = document.querySelector('.hero-title');
-        if (heroTitle) {
-            const originalText = heroTitle.textContent;
-            heroTitle.textContent = '';
+        // // Typing animation for hero title
+        // const heroTitle = document.querySelector('.hero-title');
+        // if (heroTitle) {
+        //     const originalText = heroTitle.textContent;
+        //     heroTitle.textContent = '';
             
-            let i = 0;
-            const typeWriter = () => {
-                if (i < originalText.length) {
-                    heroTitle.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
+        //     let i = 0;
+        //     const typeWriter = () => {
+        //         if (i < originalText.length) {
+        //             heroTitle.textContent += originalText.charAt(i);
+        //             i++;
+        //             setTimeout(typeWriter, 100);
+        //         }
+        //     };
             
-            // Start typing animation after a short delay
-            setTimeout(typeWriter, 1000);
-        }
+        //     // Start typing animation after a short delay
+        //     setTimeout(typeWriter, 1000);
+        // }
         
         // Intersection Observer for stats animation
         if (this.statsSection) {

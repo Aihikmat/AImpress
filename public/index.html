@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AImpress - Workshops, Coaching & Development</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="#home">
+            <img src="/images/finallogo.png" alt="AImpress Logo" class="logo-img">
+          </a>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li>
+          <li><a href="#services" class="nav-link" data-translate="nav.services">Services</a></li>
+          <li><a href="#workshops" class="nav-link" data-translate="nav.workshops">Workshops</a></li>
+          <!-- 🔧 New Automation Menu Item -->
+        <li><a href="#automation" class="nav-link" data-translate="nav.automation">Automation</a></li>
+
+          <li><a href="#about" class="nav-link" data-translate="nav.about">About</a></li>
+          <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li>
+          <li class="lang-switch">
+            <button class="lang-option active" data-lang="en">EN</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-option" data-lang="de">DE</button>
+          </li>
+          <li><a href="#appointment" class="nav-link cta-button" data-translate="nav.book">Book Session</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title" data-translate="hero.title">Transform Your Business with AI</h1>
+        <p class="hero-subtitle" data-translate="hero.subtitle">Expert workshops, personalized coaching, and custom AI solutions to accelerate your digital transformation</p>
+        <div class="hero-buttons">
+            <a href="#appointment" class="btn btn-primary" data-translate="hero.cta1">Schedule Consultation</a>
+            <a href="#services" class="btn btn-secondary" data-translate="hero.cta2">Our Services</a>
+        </div>
+    </div>
+    
+    <div class="hero-visual">
+        <div class="floating-elements">
+            <div class="element element-1"></div>
+            <div class="element element-2"></div>
+            <div class="element element-3"></div>
+        </div>
+    </div>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video id="bgVideo" autoplay muted loop playsinline>
+            <source src="https://edge-ams-1.kinescopecdn.net/66129b27-9cf2-462e-960c-84c26768e87a/videos/e7110d4d-bb55-4803-9f81-e4a78374cfcb/mp4/0193aa99-d1ff-7df1-bf37-bec219da9d97.mp4#t=0.001" type="video/mp4">
+            Your browser does not support the HTML5 video tag.
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services">
+    <div class="container">
+        <h2 class="section-title" data-translate="services.title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 data-translate="services.workshops.title">AI Workshops</h3>
+                <p data-translate="services.workshops.desc">Interactive workshops covering machine learning, automation, and AI implementation strategies for businesses of all sizes.</p>
+                <ul class="service-features">
+                    <li data-translate="services.workshops.feature1">Hands-on learning experience</li>
+                    <li data-translate="services.workshops.feature2">Industry-specific use cases</li>
+                    <li data-translate="services.workshops.feature3">Certificate of completion</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 data-translate="services.coaching.title">AI Coaching</h3>
+                <p data-translate="services.coaching.desc">One-on-one coaching sessions to help you develop AI strategies, implement solutions, and overcome technical challenges.</p>
+                <ul class="service-features">
+                    <li data-translate="services.coaching.feature1">Personalized guidance</li>
+                    <li data-translate="services.coaching.feature2">Strategic planning</li>
+                    <li data-translate="services.coaching.feature3">Ongoing support</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 data-translate="services.development.title">AI Development</h3>
+                <p data-translate="services.development.desc">Custom AI solutions tailored to your specific business needs, from chatbots to predictive analytics systems.</p>
+                <ul class="service-features">
+                    <li data-translate="services.development.feature1">Custom development</li>
+                    <li data-translate="services.development.feature2">Integration support</li>
+                    <li data-translate="services.development.feature3">Maintenance & updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Section Divider -->
+<hr class="section-divider">
+
+<section id="funding" class="funding">
+  <div class="container">
+    <h2 class="section-title" data-translate="funding.title">Förderung für Workshops</h2>
+    
+    <p class="funding-intro" data-translate="funding.intro">
+      Nutzen Sie die attraktiven Fördermöglichkeiten für Ihre KI-Weiterbildung und digitale Transformation.
+    </p>
+
+    <!-- Alert Box for Limited Funding -->
+    <div class="funding-alert">
+      <div class="funding-alert-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="funding-alert-content">
+        <h4 data-translate="funding.alert.title">Begrenzte Fördermittel</h4>
+        <p data-translate="funding.alert.desc">
+          Der Fördertopf von Digital Plus 25 umfasst 6 Millionen Euro. Die Vergabe folgt dem "first come first served" Prinzip. In den vergangenen Jahren waren die Fördermittel meist Ende Juli ausgeschöpft.
+        </p>
+      </div>
+    </div>
+
+    <!-- Funding Cards Grid -->
+    <div class="funding-grid">
+      <!-- Card 1: Digital Plus 2025 -->
+      <div class="funding-card">
+        <div class="funding-card-icon">
+          <i class="fas fa-medal"></i>
+        </div>
+        <h3 data-translate="funding.digitalplus.title">Digital Plus 2025</h3>
+        <p data-translate="funding.digitalplus.desc">
+          Das Förderprogramm unterstützt Projekte mit Schwerpunkt auf KI und mindestens 10.000 Euro Gesamtprojektkosten.
+        </p>
+        <div class="funding-highlight">
+          <span>Förderhöhe: 40% bzw. max. 8.000 € als Zuschuss</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Eligibility -->
+      <div class="funding-card">
+        <div class="funding-card-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3 data-translate="funding.eligibility.title">Förderung für KMUs in Oberösterreich</h3>
+        <p data-translate="funding.eligibility.desc">
+          Gefördert werden Projekte von kleinen und mittleren Betrieben (KMU), die aktive Mitglieder der WKOÖ sind und nicht bereits die Förderungen Digital Starter 2022 & 2023 in Kombination bezogen haben.
+        </p>
+      </div>
+
+      <!-- Card 3: Application Process -->
+      <div class="funding-card">
+        <div class="funding-card-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3 data-translate="funding.application.title">Förderantrag online stellen</h3>
+        <p data-translate="funding.application.desc">
+          Ab <span class="highlight">17.03.2025</span> kann der Förderantrag online über WKO eServices gestellt werden. Die Abrechnung ist ab dem <span class="highlight">01.07.2025</span> möglich.
+        </p>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="funding-timeline">
+      <h3 data-translate="funding.timeline.title">Förderungsprozess</h3>
+      
+      <div class="timeline-step">
+        <div class="timeline-number">1</div>
+        <div class="timeline-content">
+          <h4 data-translate="funding.timeline.step1.title">Beratungsgespräch</h4>
+          <p data-translate="funding.timeline.step1.desc">
+            Wir analysieren Ihren Bedarf und prüfen die Förderfähigkeit Ihres Projekts.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-number">2</div>
+        <div class="timeline-content">
+          <h4 data-translate="funding.timeline.step2.title">Antragsstellung</h4>
+          <p data-translate="funding.timeline.step2.desc">
+            Ab <span class="highlight">17.03.2025</span> stellen wir gemeinsam den Förderantrag über WKO eServices.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-number">3</div>
+        <div class="timeline-content">
+          <h4 data-translate="funding.timeline.step3.title">Projektdurchführung</h4>
+          <p data-translate="funding.timeline.step3.desc">
+            Nach Genehmigung führen wir Ihre maßgeschneiderten KI-Workshops durch.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-number">4</div>
+        <div class="timeline-content">
+          <h4 data-translate="funding.timeline.step4.title">Förderabrechnung</h4>
+          <p data-translate="funding.timeline.step4.desc">
+            Ab <span class="highlight">01.07.2025</span> übernehmen wir die komplette Abrechnung mit der WKO.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Card -->
+    <div class="funding-cta">
+      <h3 data-translate="funding.cta.title">Sichern Sie sich jetzt Ihre Förderung!</h3>
+      <p data-translate="funding.cta.desc">
+        Kontaktieren Sie uns für ein kostenloses Beratungsgespräch. Wir helfen Ihnen bei der gesamten Förderabwicklung – von der Antragstellung bis zur Abrechnung.
+      </p>
+      <a href="#contact" class="btn btn-primary" data-translate="funding.cta.button">Jetzt Beratung anfragen</a>
+    </div>
+  </div>
+</section>
+
+
+</section>
+
+<!-- Workshops Section -->
+<section id="workshops" class="workshops">
+  <div class="container">
+
+    <!-- New Structured Workshop Categories (moved up) -->
+    <h2 class="section-title" data-translate="workshops.overview">Workshop Overview</h2>
+
+    <!-- Internal Company Workshops -->
+    <h3 class="subsection-title" data-translate="workshops.internal.title">Workshops für Unternehmen</h3>
+    <p data-translate="workshops.internal.desc">
+      Individuelle Workshops für Unternehmen, in denen wir spezifische Use Cases gemeinsam mit Ihnen erarbeiten.
+    </p>
+
+    <!-- Open Workshops -->
+    <h3 class="subsection-title" data-translate="workshops.open.title">Offene Workshops</h3>
+    <p data-translate="workshops.open.desc">
+      Kleine Use Cases und breiteres Wissen für alle Interessierten – offen für Einzelpersonen und kleine Teams.
+    </p>
+
+    <!-- Topics -->
+    <h3 class="subsection-title" data-translate="workshops.topics.title">Unsere Workshop-Themen</h3>
+    <ul class="workshop-topics">
+      <li><i class="fas fa-user-tie"></i> <span data-translate="workshops.topics.hr">KI für HR</span></li>
+      <li><i class="fas fa-chart-line"></i> <span data-translate="workshops.topics.sales">KI für Sales & Marketing</span></li>
+      <li><i class="fas fa-briefcase"></i> <span data-translate="workshops.topics.admin">KI für Verwaltung</span></li>
+      <li><i class="fas fa-industry"></i> <span data-translate="workshops.topics.industry">KI für Industrie</span></li>
+      <li><i class="fas fa-brain"></i> <span data-translate="workshops.topics.basic">KI Basics</span></li>
+    </ul>
+
+    <!-- Compliance Note -->
+    <div class="compliance-note">
+      <h4 data-translate="workshops.compliance.title">Datenschutz & Regulierung</h4>
+      <p data-translate="workshops.compliance.desc">
+        In jedem unserer Workshops legen wir besonderen Wert auf den verantwortungsvollen Einsatz von KI,
+        insbesondere im Hinblick auf <strong>Datenschutzgesetze</strong> und den <strong>EU-AI Act</strong>.
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <hr class="section-divider">
+
+    <!-- Existing Upcoming Workshops -->
+    <h2 class="section-title" data-translate="workshops.title">Upcoming Workshops</h2>
+    <div class="workshops-grid">
+      <!-- Workshop 1 -->
+      <div class="workshop-card">
+        <div class="workshop-image">
+          <div class="workshop-date">
+            <span class="day">15</span>
+            <span class="month" data-translate="workshops.sep">Sep</span>
+          </div>
+        </div>
+        <div class="workshop-content">
+          <h3 data-translate="workshops.workshop1.title">Introduction to Machine Learning</h3>
+          <p data-translate="workshops.workshop1.desc">Learn the fundamentals of ML algorithms and their practical applications in business environments.</p>
+          <div class="workshop-meta">
+            <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop1.duration">3 hours</span></span>
+            <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop1.participants">Max 20 participants</span></span>
+            <span><i class="fas fa-user-check"></i> <span data-translate="workshops.workshop1.spots">5 spots left</span></span>
+          </div>
+          <button class="btn btn-outline register-btn" data-workshop="Introduction to Machine Learning" data-translate="workshops.register">
+            Register Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Workshop 2 -->
+      <div class="workshop-card">
+        <div class="workshop-image">
+          <div class="workshop-date">
+            <span class="day">22</span>
+            <span class="month" data-translate="workshops.sep">Sep</span>
+          </div>
+        </div>
+        <div class="workshop-content">
+          <h3 data-translate="workshops.workshop2.title">AI for Business Automation</h3>
+          <p data-translate="workshops.workshop2.desc">Discover how to automate business processes using AI tools and increase operational efficiency.</p>
+          <div class="workshop-meta">
+            <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop2.duration">4 hours</span></span>
+            <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop2.participants">Max 15 participants</span></span>
+            <span><i class="fas fa-user-check"></i> <span data-translate="workshops.workshop2.spots">3 spots left</span></span>
+          </div>
+          <button class="btn btn-outline register-btn" data-workshop="AI for Business Automation" data-translate="workshops.register">
+            Register Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Workshop 3 -->
+      <div class="workshop-card">
+        <div class="workshop-image">
+          <div class="workshop-date">
+            <span class="day">29</span>
+            <span class="month" data-translate="workshops.sep">Sep</span>
+          </div>
+        </div>
+        <div class="workshop-content">
+          <h3 data-translate="workshops.workshop3.title">Building AI Chatbots</h3>
+          <p data-translate="workshops.workshop3.desc">Hands-on workshop to create intelligent chatbots for customer service and lead generation.</p>
+          <div class="workshop-meta">
+            <span><i class="fas fa-clock"></i> <span data-translate="workshops.workshop3.duration">5 hours</span></span>
+            <span><i class="fas fa-users"></i> <span data-translate="workshops.workshop3.participants">Max 12 participants</span></span>
+            <span><i class="fas fa-user-check"></i> <span data-translate="workshops.workshop3.spots">2 spots left</span></span>
+          </div>
+          <button class="btn btn-outline register-btn" data-workshop="Building AI Chatbots" data-translate="workshops.register">
+            Register Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<div id="registrationForm" class="form-overlay" style="display:none;">
+  <div class="form-container">
+    <button type="button" class="close-btn" id="closeForm">&times;</button>
+    <h3>Workshop Registration</h3>
+    <form id="workshopForm">
+      <input type="hidden" name="workshop" id="workshopInput">
+      
+      <label>First Name *</label>
+      <input type="text" id="firstName" required>
+
+      <label>Last Name *</label>
+      <input type="text" id="lastName" required>
+
+      <label>Email *</label>
+      <input type="email" id="email" required>
+
+      <label>Date of Birth *</label>
+      <input type="date" id="dob" required>
+
+      <label>Address *</label>
+      <textarea id="address" rows="2" required></textarea>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-outline" id="cancelForm">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Automation Section -->
+<section id="automation" class="services">
+    <div class="container">
+        <h2 class="section-title" data-translate="automation.title">Automation</h2>
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 data-translate="automation.chatbots">Chatbots</h3>
+                <p data-translate="automation.chatbots.desc">Intelligente Chatbots zur Kundeninteraktion und Prozessautomatisierung.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 data-translate="automation.rag">Chatbots mit RAG</h3>
+                <p data-translate="automation.rag.desc">Chatbots, die mit Retrieval-Augmented Generation (RAG) auf deine Unternehmensdaten zugreifen.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 data-translate="automation.general">Allgemeine Automation</h3>
+                <p data-translate="automation.general.desc">Automatisierung von Geschäftsprozessen für mehr Effizienz.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 data-translate="automation.n8n">n8n Automations</h3>
+                <p data-translate="automation.n8n.desc">Automatisierte Workflows, z. B. Newsletter-Systeme oder API-Verknüpfungen.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 data-translate="automation.agents">Agenten</h3>
+                <p data-translate="automation.agents.desc">Verschiedene Arten von Agenten – von Entscheidungsagenten bis hin zu Multi-Agent-Systemen.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3 data-translate="automation.cv">Computer Vision</h3>
+                <p data-translate="automation.cv.desc">Objekterkennung, Klassifikation und Segmentierung für visuelle Daten.</p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title">
+  <img src="/images/finallogo.png",  class="title-logo">
+</h2>
+                <p data-translate="about.desc">Wir haben diese KI-Agentur als engagiertes Team von KI-Masterabsolventen gegründet – mit dem Ziel, künstliche Intelligenz für Unternehmen praktisch nutzbar und zugänglich zu machen. KI kann Prozesse optimieren, Effizienz steigern und Innovation fördern – und das sollte jedem Unternehmen möglich sein, nicht nur den Tech-Giganten.</p>
+            </div>
+            <div class="about-visual">
+                <div class="tech-stack">
+                    <div class="tech-item">Data Science</div>
+                    <div class="tech-item">Machine Learning</div>
+                    <div class="tech-item">Deep Learning</div>
+                    <div class="tech-item">Large Language Models (LLMs)</div>
+                    <div class="tech-item">AI Agents</div>
+                    <div class="tech-item">Generative AI</div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Appointment Section -->
+<section id="appointment" class="appointment">
+    <div class="container">
+        <h2 class="section-title" data-translate="appointment.title">Book Your Session</h2>
+        <div class="appointment-content">
+            <div class="appointment-info">
+                <h3 data-translate="appointment.ready">Ready to get started?</h3>
+                <p data-translate="appointment.desc">Schedule a consultation or book a workshop slot using our integrated calendar system.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+43 676 5250681</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@aisolutionshub.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-translate="appointment.location">  4020 Linz</span>
+                    </div>
+                </div>
+            </div>
+            <div class="calendar-container">
+                <div id="calendar-widget" class="calendar-widget">
+                    <div class="calendar-header">
+                        <h4 data-translate="appointment.select">Select a Date & Time</h4>
+                        <div class="calendar-controls">
+                            <button id="prev-month" class="calendar-btn">&lt;</button>
+                            <span id="current-month"></span>
+                            <button id="next-month" class="calendar-btn">&gt;</button>
+                        </div>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid"></div>
+                    <div id="time-slots" class="time-slots" style="display: none;">
+                        <h5 data-translate="appointment.available">Available Times</h5>
+                        <div id="slots-container"></div>
+                    </div>
+                    <button id="google-calendar-btn" class="btn btn-primary" style="display: none;">
+                        <i class="fab fa-google"></i> <span data-translate="appointment.add">Add to Google Calendar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-form">
+                <h3 data-translate="contact.title">Get in Touch</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required data-translate-placeholder="contact.name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required data-translate-placeholder="contact.email">
+                    </div>
+                    <div class="form-group">
+                        <select id="service" name="service" required>
+                            <option value="" data-translate="contact.select">Select a Service</option>
+                            <option value="Workshop" data-translate="contact.workshop">Workshop</option>
+                            <option value="1-on-1 Coaching" data-translate="contact.coaching">1-on-1 Coaching</option>
+                            <option value="AI Development" data-translate="contact.development">AI Development</option>
+                            <option value="Consultation" data-translate="contact.consultation">Consultation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Tell us about your project or questions" rows="5" required data-translate-placeholder="contact.message"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary send_btn" data-translate="contact.send">Send Message</button>
+</form>
+
+<!-- feedback text -->
+<p id="form-response"></p>
+
+            </div>
+            <div class="contact-map">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p data-translate="contact.map">  4020 Linz</p>
+                    <!-- Google Map Embed -->
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3316.123456789012!2d14.2840!3d48.3064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773bc50abcdef12%3A0xabcdef1234567890!2sLinz%20Innenstadt!5e0!3m2!1sen!2sat!4v1699999999999!5m2!1sen!2sat"
+                      width="100%"
+                      height="400"
+                      style="border:0;"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AImpress</h4>
+                <p data-translate="footer.desc">Transforming businesses through AI innovation and education.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="footer.services">Services</h4>
+                <ul>
+                    <li><a href="#services" data-translate="footer.workshops">AI Workshops</a></li>
+                    <li><a href="#services" data-translate="footer.coaching">AI Coaching</a></li>
+                    <li><a href="#services" data-translate="footer.development">AI Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="footer.contact">Contact</h4>
+                <p data-translate="footer.email">Email: info@aisolutionshub.com</p>
+                <p data-translate="footer.phone">Phone: +43 676 5250681</p>
+                <p data-translate="footer.location">Location:   4020 Linz</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-links">
+  <a href="impressum" class="footer-link">Impressum</a>
+  <span>|</span>
+  <a href="datenschutz" class="footer-link">Datenschutz</a>
+  <span>|</span>
+  <a href="abg" class="footer-link">AGB</a>
+</div>
+
+            <p>&copy; 2025 AImpress. <span data-translate="footer.rights">All rights reserved.</span></p>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/modules/navigation.js"></script>
+<script src="/js/modules/video.js"></script>
+<script type="module" src="/js/modules/form.js"></script>
+<script src="/js/modules/animations.js"></script>
+<script src="/js/modules/language.js"></script>
+<script src="/js/calendar.js"></script>
+<script type="module" src="/js/modules/registration.js"></script>
+<script>
+    // Initialize all modules when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize navigation
+        new Navigation();
+        
+        // Initialize video handler
+        new VideoHandler();
+        
+        // Initialize form handler
+        new FormHandler();
+        
+        // Initialize animations
+        new Animations();
+        
+        // Language switcher is initialized in language.js module
+        // new LanguageSwitcher(); // Removed to prevent double initialization
+    });
+</script>
+</body>
+</html>
