@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Socket.IO Content Update Test</h1>
+    
+    <div id="connection-status" class="status disconnected">Connecting...</div>
+    
+    <div>
+        <h2>Last Content Update:</h2>
+        <pre id="content-data">No updates received yet</pre>
+    </div>
+    
+    <div>
+        <h2>Hero Title:</h2>
+        <p id="hero-title">Not loaded yet</p>
+    </div>
+    
+    <button onclick="updateContent()">Update Content (Test)</button>
+    
+    <script>
+        // Connect to Socket.IO server
+        const socket = io();
+        
+        // Connection status elements
+        const statusElement = document.getElementById('connection-status');
+        const contentElement = document.getElementById('content-data');
+        const heroTitleElement = document.getElementById('hero-title');
+        
+        // Handle connection
+        socket.on('connect', () => {
+            statusElement.textContent = 'Connected to server';
+            statusElement.className = 'status connected';
+            console.log('Connected to Socket.IO server');
+        });
+        
+        // Handle disconnection
+        socket.on('disconnect', () => {
+            statusElement.textContent = 'Disconnected from server';
+            statusElement.className = 'status disconnected';
+            console.log('Disconnected from Socket.IO server');
+        });
+        
+        // Handle content updates
+        socket.on('contentUpdated', (data) => {
+            console.log('Received content update:', data);
+            contentElement.textContent = JSON.stringify(data, null, 2);
+            
+            // Update hero title if available
+            if (data.hero && data.hero.title) {
+                heroTitleElement.textContent = data.hero.title;
+            }
+        });
+        
+        // Function to test content update
+        async function updateContent() {
+            try {
+                const response = await fetch('/api/content', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        hero: {
+                            title: 'Test Update at ' + new Date().toLocaleTimeString()
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Content update response:', result);
+            } catch (error) {
+                console.error('Error updating content:', error);
+            }
+        }
+    </script>
+</body>
+</html>

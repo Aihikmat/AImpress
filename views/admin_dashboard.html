@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AImpress</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --sidebar-width: 250px;
+            --header-height: 60px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #f5f7fb;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+        
+        .sidebar-menu-item {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid white;
+        }
+        
+        .sidebar-menu-item i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 1rem;
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 2rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-header h2 {
+            color: #333;
+            margin: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #219653;
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .stat-card p {
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Messages Table */
+        .messages-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .messages-table th,
+        .messages-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .messages-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .messages-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Language Tabs */
+        .language-tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .language-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .language-tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Translation Keys */
+        .translation-key {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        
+        .translation-key-input {
+            flex: 1;
+            margin-right: 1rem;
+        }
+        
+        .translation-key-value {
+            flex: 2;
+            margin-right: 1rem;
+        }
+        
+        .translation-key-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Dynamic Items */
+        .dynamic-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+        }
+        
+        .dynamic-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dynamic-item-title {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .features-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-item input {
+            flex: 1;
+            margin-right: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header h2,
+            .sidebar-menu-item span {
+                display: none;
+            }
+            
+            .sidebar-menu-item {
+                justify-content: center;
+                padding: 1rem;
+            }
+            
+            .sidebar-menu-item i {
+                margin-right: 0;
+                font-size: 1.5rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>AImpress Admin</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="sidebar-menu-item active" data-section="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="hero">
+                <i class="fas fa-heading"></i>
+                <span>Hero Section</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="services">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Services</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="automation">
+                <i class="fas fa-robot"></i>
+                <span>Automation</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="workshops">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Workshops</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="translations">
+                <i class="fas fa-language"></i>
+                <span>Translations</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="messages">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+            </div>
+            <div class="sidebar-menu-item" data-section="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Dashboard Section -->
+            <div class="section active" id="dashboard-section">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3 id="messages-count">0</h3>
+                        <p>Messages</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3 id="workshops-count">0</h3>
+                        <p>Workshops</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3 id="registrations-count">0</h3>
+                        <p>Registrations</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>98%</h3>
+                        <p>Satisfaction</p>
+                    </div>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Recent Messages</h2>
+                </div>
+                <div id="recent-messages">
+                    <p>Loading recent messages...</p>
+                </div>
+            </div>
+            
+            <!-- Hero Section -->
+            <div class="section" id="hero-section">
+                <div class="section-header">
+                    <h2>Hero Section</h2>
+                </div>
+                
+                <form id="hero-form">
+                    <div class="message" id="hero-message"></div>
+                    
+                    <div class="language-tabs">
+                        <div class="language-tab active" data-lang="en">English</div>
+                        <div class="language-tab" data-lang="de">German</div>
+                    </div>
+                    
+                    <div class="language-content active" data-lang="en">
+                        <h3>English Content</h3>
+                        <div class="form-group">
+                            <label for="hero-title-en">Title (English)</label>
+                            <input type="text" id="hero-title-en" name="hero-title-en">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-subtitle-en">Subtitle (English)</label>
+                            <textarea id="hero-subtitle-en" name="hero-subtitle-en"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-cta1-en">Primary CTA Text (English)</label>
+                            <input type="text" id="hero-cta1-en" name="hero-cta1-en">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-cta2-en">Secondary CTA Text (English)</label>
+                            <input type="text" id="hero-cta2-en" name="hero-cta2-en">
+                        </div>
+                    </div>
+                    
+                    <div class="language-content" data-lang="de" style="display: none;">
+                        <h3>German Content</h3>
+                        <div class="form-group">
+                            <label for="hero-title-de">Title (German)</label>
+                            <input type="text" id="hero-title-de" name="hero-title-de">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-subtitle-de">Subtitle (German)</label>
+                            <textarea id="hero-subtitle-de" name="hero-subtitle-de"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-cta1-de">Primary CTA Text (German)</label>
+                            <input type="text" id="hero-cta1-de" name="hero-cta1-de">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hero-cta2-de">Secondary CTA Text (German)</label>
+                            <input type="text" id="hero-cta2-de" name="hero-cta2-de">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Update Hero Section</button>
+                </form>
+            </div>
+            
+            <!-- Services Section -->
+            <div class="section" id="services-section">
+                <div class="section-header">
+                    <h2>Services Section</h2>
+                </div>
+                
+                <div class="message" id="services-message"></div>
+                
+                <div class="section-header">
+                    <h3>Add New Service</h3>
+                </div>
+                
+                <form id="add-service-form">
+                    <div class="form-group">
+                        <label for="new-service-id">Service ID</label>
+                        <input type="text" id="new-service-id" placeholder="e.g., consulting">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-service-icon">Icon Class</label>
+                        <input type="text" id="new-service-icon" placeholder="e.g., fas fa-user-tie">
+                    </div>
+                    
+                    <div class="language-tabs">
+                        <div class="language-tab active" data-lang="en">English</div>
+                        <div class="language-tab" data-lang="de">German</div>
+                    </div>
+                    
+                    <div class="language-content active" data-lang="en">
+                        <h4>English Content</h4>
+                        <div class="form-group">
+                            <label for="new-service-title-en">Title (English)</label>
+                            <input type="text" id="new-service-title-en" placeholder="Service Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-service-desc-en">Description (English)</label>
+                            <textarea id="new-service-desc-en" placeholder="Service Description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Features (English)</label>
+                            <div id="new-service-features-en">
+                                <div class="feature-item">
+                                    <input type="text" placeholder="Feature 1">
+                                    <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-feature-btn" data-lang="en">Add Feature</button>
+                        </div>
+                    </div>
+                    
+                    <div class="language-content" data-lang="de" style="display: none;">
+                        <h4>German Content</h4>
+                        <div class="form-group">
+                            <label for="new-service-title-de">Title (German)</label>
+                            <input type="text" id="new-service-title-de" placeholder="Service Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-service-desc-de">Description (German)</label>
+                            <textarea id="new-service-desc-de" placeholder="Service Description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Features (German)</label>
+                            <div id="new-service-features-de">
+                                <div class="feature-item">
+                                    <input type="text" placeholder="Feature 1">
+                                    <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-feature-btn" data-lang="de">Add Feature</button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Add Service</button>
+                </form>
+                
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3>Existing Services</h3>
+                </div>
+                
+                <div id="services-list">
+                    <p>Loading services...</p>
+                </div>
+                                    
+                <!-- Edit Service Form (Hidden by default) -->
+                <div id="edit-service-form-container" style="display: none;">
+                    <div class="section-header">
+                        <h3>Edit Service</h3>
+                    </div>
+                    <form id="edit-service-form">
+                        <input type="hidden" id="edit-service-id">
+                                            
+                        <div class="form-group">
+                            <label for="edit-service-icon">Icon Class</label>
+                            <input type="text" id="edit-service-icon" placeholder="e.g., fas fa-user-tie">
+                        </div>
+                                            
+                        <div class="language-tabs">
+                            <div class="language-tab active" data-lang="en">English</div>
+                            <div class="language-tab" data-lang="de">German</div>
+                        </div>
+                                            
+                        <div class="language-content active" data-lang="en">
+                            <h4>English Content</h4>
+                            <div class="form-group">
+                                <label for="edit-service-title-en">Title (English)</label>
+                                <input type="text" id="edit-service-title-en" placeholder="Service Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-service-desc-en">Description (English)</label>
+                                <textarea id="edit-service-desc-en" placeholder="Service Description"></textarea>
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label>Features (English)</label>
+                                <div id="edit-service-features-en">
+                                    <div class="feature-item">
+                                        <input type="text" placeholder="Feature 1">
+                                        <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary add-feature-btn" data-lang="en">Add Feature</button>
+                            </div>
+                        </div>
+                                            
+                        <div class="language-content" data-lang="de" style="display: none;">
+                            <h4>German Content</h4>
+                            <div class="form-group">
+                                <label for="edit-service-title-de">Title (German)</label>
+                                <input type="text" id="edit-service-title-de" placeholder="Service Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-service-desc-de">Description (German)</label>
+                                <textarea id="edit-service-desc-de" placeholder="Service Description"></textarea>
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label>Features (German)</label>
+                                <div id="edit-service-features-de">
+                                    <div class="feature-item">
+                                        <input type="text" placeholder="Feature 1">
+                                        <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary add-feature-btn" data-lang="de">Add Feature</button>
+                            </div>
+                        </div>
+                                            
+                        <button type="submit" class="btn btn-success">Update Service</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit-service">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Automation Section -->
+            <div class="section" id="automation-section">
+                <div class="section-header">
+                    <h2>Automation Section</h2>
+                </div>
+                
+                <div class="message" id="automation-message"></div>
+                
+                <div class="section-header">
+                    <h3>Add New Automation</h3>
+                </div>
+                
+                <form id="add-automation-form">
+                    <div class="form-group">
+                        <label for="new-automation-id">Automation ID</label>
+                        <input type="text" id="new-automation-id" placeholder="e.g., analytics">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-automation-icon">Icon Class</label>
+                        <input type="text" id="new-automation-icon" placeholder="e.g., fas fa-chart-line">
+                    </div>
+                    
+                    <div class="language-tabs">
+                        <div class="language-tab active" data-lang="en">English</div>
+                        <div class="language-tab" data-lang="de">German</div>
+                    </div>
+                    
+                    <div class="language-content active" data-lang="en">
+                        <h4>English Content</h4>
+                        <div class="form-group">
+                            <label for="new-automation-title-en">Title (English)</label>
+                            <input type="text" id="new-automation-title-en" placeholder="Automation Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-automation-desc-en">Description (English)</label>
+                            <textarea id="new-automation-desc-en" placeholder="Automation Description"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="language-content" data-lang="de" style="display: none;">
+                        <h4>German Content</h4>
+                        <div class="form-group">
+                            <label for="new-automation-title-de">Title (German)</label>
+                            <input type="text" id="new-automation-title-de" placeholder="Automation Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-automation-desc-de">Description (German)</label>
+                            <textarea id="new-automation-desc-de" placeholder="Automation Description"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Add Automation</button>
+                </form>
+                
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3>Existing Automations</h3>
+                </div>
+                
+                <div id="automations-list">
+                    <p>Loading automations...</p>
+                </div>
+                                    
+                <!-- Edit Automation Form (Hidden by default) -->
+                <div id="edit-automation-form-container" style="display: none;">
+                    <div class="section-header">
+                        <h3>Edit Automation</h3>
+                    </div>
+                    <form id="edit-automation-form">
+                        <input type="hidden" id="edit-automation-id">
+                                            
+                        <div class="form-group">
+                            <label for="edit-automation-icon">Icon Class</label>
+                            <input type="text" id="edit-automation-icon" placeholder="e.g., fas fa-chart-line">
+                        </div>
+                                            
+                        <div class="language-tabs">
+                            <div class="language-tab active" data-lang="en">English</div>
+                            <div class="language-tab" data-lang="de">German</div>
+                        </div>
+                                            
+                        <div class="language-content active" data-lang="en">
+                            <h4>English Content</h4>
+                            <div class="form-group">
+                                <label for="edit-automation-title-en">Title (English)</label>
+                                <input type="text" id="edit-automation-title-en" placeholder="Automation Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-automation-desc-en">Description (English)</label>
+                                <textarea id="edit-automation-desc-en" placeholder="Automation Description"></textarea>
+                            </div>
+                        </div>
+                                            
+                        <div class="language-content" data-lang="de" style="display: none;">
+                            <h4>German Content</h4>
+                            <div class="form-group">
+                                <label for="edit-automation-title-de">Title (German)</label>
+                                <input type="text" id="edit-automation-title-de" placeholder="Automation Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-automation-desc-de">Description (German)</label>
+                                <textarea id="edit-automation-desc-de" placeholder="Automation Description"></textarea>
+                            </div>
+                        </div>
+                                            
+                        <button type="submit" class="btn btn-success">Update Automation</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit-automation">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Workshops Section -->
+            <div class="section" id="workshops-section">
+                <div class="section-header">
+                    <h2>Workshops Section</h2>
+                </div>
+                
+                <div class="message" id="workshops-message"></div>
+                
+                <div class="section-header">
+                    <h3>Add New Workshop</h3>
+                </div>
+                
+                <form id="add-workshop-form">
+                    <div class="form-group">
+                        <label for="new-workshop-id">Workshop ID</label>
+                        <input type="text" id="new-workshop-id" placeholder="e.g., workshop4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Date</label>
+                        <div style="display: flex; gap: 1rem;">
+                            <input type="text" id="new-workshop-day" placeholder="Day" style="flex: 1;">
+                            <input type="text" id="new-workshop-month" placeholder="Month" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <div class="language-tabs">
+                        <div class="language-tab active" data-lang="en">English</div>
+                        <div class="language-tab" data-lang="de">German</div>
+                    </div>
+                    
+                    <div class="language-content active" data-lang="en">
+                        <h4>English Content</h4>
+                        <div class="form-group">
+                            <label for="new-workshop-title-en">Title (English)</label>
+                            <input type="text" id="new-workshop-title-en" placeholder="Workshop Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-workshop-desc-en">Description (English)</label>
+                            <textarea id="new-workshop-desc-en" placeholder="Workshop Description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Metadata (English)</label>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <input type="text" id="new-workshop-duration-en" placeholder="Duration" style="flex: 1; min-width: 150px;">
+                                <input type="text" id="new-workshop-participants-en" placeholder="Participants" style="flex: 1; min-width: 150px;">
+                                <input type="text" id="new-workshop-spots-en" placeholder="Spots" style="flex: 1; min-width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="language-content" data-lang="de" style="display: none;">
+                        <h4>German Content</h4>
+                        <div class="form-group">
+                            <label for="new-workshop-title-de">Title (German)</label>
+                            <input type="text" id="new-workshop-title-de" placeholder="Workshop Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-workshop-desc-de">Description (German)</label>
+                            <textarea id="new-workshop-desc-de" placeholder="Workshop Description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Metadata (German)</label>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <input type="text" id="new-workshop-duration-de" placeholder="Duration" style="flex: 1; min-width: 150px;">
+                                <input type="text" id="new-workshop-participants-de" placeholder="Participants" style="flex: 1; min-width: 150px;">
+                                <input type="text" id="new-workshop-spots-de" placeholder="Spots" style="flex: 1; min-width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Add Workshop</button>
+                </form>
+                
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3>Existing Workshops</h3>
+                </div>
+                
+                <div id="workshops-list">
+                    <p>Loading workshops...</p>
+                </div>
+                                    
+                <!-- Edit Workshop Form (Hidden by default) -->
+                <div id="edit-workshop-form-container" style="display: none;">
+                    <div class="section-header">
+                        <h3>Edit Workshop</h3>
+                    </div>
+                    <form id="edit-workshop-form">
+                        <input type="hidden" id="edit-workshop-id">
+                                            
+                        <div class="form-group">
+                            <label>Date</label>
+                            <div style="display: flex; gap: 1rem;">
+                                <input type="text" id="edit-workshop-day" placeholder="Day" style="flex: 1;">
+                                <input type="text" id="edit-workshop-month" placeholder="Month" style="flex: 1;">
+                            </div>
+                        </div>
+                                            
+                        <div class="language-tabs">
+                            <div class="language-tab active" data-lang="en">English</div>
+                            <div class="language-tab" data-lang="de">German</div>
+                        </div>
+                                            
+                        <div class="language-content active" data-lang="en">
+                            <h4>English Content</h4>
+                            <div class="form-group">
+                                <label for="edit-workshop-title-en">Title (English)</label>
+                                <input type="text" id="edit-workshop-title-en" placeholder="Workshop Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-workshop-desc-en">Description (English)</label>
+                                <textarea id="edit-workshop-desc-en" placeholder="Workshop Description"></textarea>
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label>Metadata (English)</label>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <input type="text" id="edit-workshop-duration-en" placeholder="Duration" style="flex: 1; min-width: 150px;">
+                                    <input type="text" id="edit-workshop-participants-en" placeholder="Participants" style="flex: 1; min-width: 150px;">
+                                    <input type="text" id="edit-workshop-spots-en" placeholder="Spots" style="flex: 1; min-width: 150px;">
+                                </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="language-content" data-lang="de" style="display: none;">
+                            <h4>German Content</h4>
+                            <div class="form-group">
+                                <label for="edit-workshop-title-de">Title (German)</label>
+                                <input type="text" id="edit-workshop-title-de" placeholder="Workshop Title">
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label for="edit-workshop-desc-de">Description (German)</label>
+                                <textarea id="edit-workshop-desc-de" placeholder="Workshop Description"></textarea>
+                            </div>
+                                                
+                            <div class="form-group">
+                                <label>Metadata (German)</label>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <input type="text" id="edit-workshop-duration-de" placeholder="Duration" style="flex: 1; min-width: 150px;">
+                                    <input type="text" id="edit-workshop-participants-de" placeholder="Participants" style="flex: 1; min-width: 150px;">
+                                    <input type="text" id="edit-workshop-spots-de" placeholder="Spots" style="flex: 1; min-width: 150px;">
+                                </div>
+                            </div>
+                        </div>
+                                            
+                        <button type="submit" class="btn btn-success">Update Workshop</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit-workshop">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="section" id="about-section">
+                <div class="section-header">
+                    <h2>About Section</h2>
+                </div>
+                
+                <form id="about-form">
+                    <div class="message" id="about-message"></div>
+                    
+                    <div class="language-tabs">
+                        <div class="language-tab active" data-lang="en">English</div>
+                        <div class="language-tab" data-lang="de">German</div>
+                    </div>
+                    
+                    <div class="language-content active" data-lang="en">
+                        <h3>English Content</h3>
+                        <div class="form-group">
+                            <label for="about-title-en">Title (English)</label>
+                            <input type="text" id="about-title-en" name="about-title-en">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="about-desc-en">Description (English)</label>
+                            <textarea id="about-desc-en" name="about-desc-en"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="language-content" data-lang="de" style="display: none;">
+                        <h3>German Content</h3>
+                        <div class="form-group">
+                            <label for="about-title-de">Title (German)</label>
+                            <input type="text" id="about-title-de" name="about-title-de">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="about-desc-de">Description (German)</label>
+                            <textarea id="about-desc-de" name="about-desc-de"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="section-header" style="margin-top: 2rem;">
+                        <h3>Statistics</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Statistics (English)</label>
+                        <div id="about-stats-en">
+                            <div class="feature-item">
+                                <input type="text" placeholder="Label" style="width: 40%;">
+                                <input type="text" placeholder="Value" style="width: 40%; margin-left: 1rem;">
+                                <button type="button" class="btn btn-danger remove-stat-btn">-</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary add-stat-btn" data-lang="en">Add Statistic</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Statistics (German)</label>
+                        <div id="about-stats-de">
+                            <div class="feature-item">
+                                <input type="text" placeholder="Label" style="width: 40%;">
+                                <input type="text" placeholder="Value" style="width: 40%; margin-left: 1rem;">
+                                <button type="button" class="btn btn-danger remove-stat-btn">-</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary add-stat-btn" data-lang="de">Add Statistic</button>
+                    </div>
+                    
+                    <button type="submit" class="btn">Update About Section</button>
+                </form>
+            </div>
+            
+            <!-- Translations Section -->
+            <div class="section" id="translations-section">
+                <div class="section-header">
+                    <h2>Translations Management</h2>
+                </div>
+                
+                <div class="message" id="translations-message"></div>
+                
+                <div class="form-group">
+                    <label for="translation-language">Language</label>
+                    <select id="translation-language">
+                        <option value="en">English</option>
+                        <option value="de">German</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-translation-key">New Translation Key</label>
+                    <input type="text" id="new-translation-key" placeholder="e.g., nav.home">
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-translation-value">Translation Value</label>
+                    <input type="text" id="new-translation-value" placeholder="e.g., Home">
+                </div>
+                
+                <button id="add-translation-btn" class="btn">Add Translation</button>
+                
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3>Existing Translations</h3>
+                </div>
+                
+                <div id="translations-list">
+                    <p>Loading translations...</p>
+                </div>
+            </div>
+            
+            <!-- Messages Section -->
+            <div class="section" id="messages-section">
+                <div class="section-header">
+                    <h2>Contact Messages</h2>
+                </div>
+                
+                <div id="messages-content">
+                    <p>Loading messages...</p>
+                </div>
+            </div>
+            
+            <!-- Settings Section -->
+            <div class="section" id="settings-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="message" id="settings-message">
+                    <p>Settings management coming soon...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const sidebarItems = document.querySelectorAll('.sidebar-menu-item');
+        const sections = document.querySelectorAll('.section');
+        const logoutBtn = document.getElementById('logout-btn');
+        const languageTabs = document.querySelectorAll('.language-tab');
+        
+        // Load content when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load website content
+            await loadWebsiteContent();
+            
+            // Load translations
+            await loadTranslations();
+            
+            // Load messages count and recent messages
+            await loadMessagesData();
+            
+            // Load other data
+            loadOtherData();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Setup event listeners for edit form language tabs
+            setupEditFormLanguageTabs();
+        });
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Sidebar navigation
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section') + '-section';
+                    document.getElementById(sectionId).classList.add('active');
+                    
+                    // Load data for the section if needed
+                    if (this.getAttribute('data-section') === 'messages') {
+                        loadMessages();
+                    } else if (this.getAttribute('data-section') === 'services') {
+                        loadServices();
+                    } else if (this.getAttribute('data-section') === 'automation') {
+                        loadAutomations();
+                    } else if (this.getAttribute('data-section') === 'workshops') {
+                        loadWorkshops();
+                    }
+                });
+            });
+            
+            // Language tabs
+            languageTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const parent = this.closest('.section');
+                    
+                    // Remove active class from all tabs in this section
+                    parent.querySelectorAll('.language-tab').forEach(t => t.classList.remove('active'));
+                    parent.querySelectorAll('.language-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    parent.querySelectorAll(`.language-content[data-lang="${lang}"]`).forEach(c => {
+                        c.classList.add('active');
+                        c.style.display = 'block';
+                    });
+                    
+                    // Hide other content
+                    parent.querySelectorAll(`.language-content:not([data-lang="${lang}"])`).forEach(c => {
+                        c.style.display = 'none';
+                    });
+                });
+            });
+            
+            // Logout functionality
+            logoutBtn.addEventListener('click', function() {
+                // In a real application, you would invalidate the session
+                window.location.href = '/admin/login';
+            });
+            
+            // Add feature buttons
+            document.querySelectorAll('.add-feature-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const container = document.getElementById(`new-service-features-${lang}`);
+                    const featureItem = document.createElement('div');
+                    featureItem.className = 'feature-item';
+                    featureItem.innerHTML = `
+                        <input type="text" placeholder="Feature">
+                        <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                    `;
+                    container.appendChild(featureItem);
+                    
+                    // Add event listener to the new remove button
+                    featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                        container.removeChild(featureItem);
+                    });
+                });
+            });
+            
+            // Remove feature buttons
+            document.querySelectorAll('.remove-feature-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const featureItem = this.closest('.feature-item');
+                    const container = featureItem.parentElement;
+                    if (container.children.length > 1) {
+                        container.removeChild(featureItem);
+                    } else {
+                        // Don't remove the last feature, just clear it
+                        featureItem.querySelector('input').value = '';
+                    }
+                });
+            });
+            
+            // Add stat buttons
+            document.querySelectorAll('.add-stat-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const container = lang === 'en' ? document.getElementById('about-stats-en') : document.getElementById('about-stats-de');
+                    const statItem = document.createElement('div');
+                    statItem.className = 'feature-item';
+                    statItem.innerHTML = `
+                        <input type="text" placeholder="Label" style="width: 40%;">
+                        <input type="text" placeholder="Value" style="width: 40%; margin-left: 1rem;">
+                        <button type="button" class="btn btn-danger remove-stat-btn">-</button>
+                    `;
+                    container.appendChild(statItem);
+                    
+                    // Add event listener to the new remove button
+                    statItem.querySelector('.remove-stat-btn').addEventListener('click', function() {
+                        container.removeChild(statItem);
+                    });
+                });
+            });
+            
+            // Remove stat buttons
+            document.querySelectorAll('.remove-stat-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const statItem = this.closest('.feature-item');
+                    const container = statItem.parentElement;
+                    if (container.children.length > 1) {
+                        container.removeChild(statItem);
+                    } else {
+                        // Don't remove the last stat, just clear it
+                        statItem.querySelector('input:first-child').value = '';
+                        statItem.querySelector('input:last-child').value = '';
+                    }
+                });
+            });
+            
+            // Form submissions
+            document.getElementById('hero-form').addEventListener('submit', handleHeroFormSubmit);
+            document.getElementById('add-service-form').addEventListener('submit', handleAddServiceFormSubmit);
+            document.getElementById('add-automation-form').addEventListener('submit', handleAddAutomationFormSubmit);
+            document.getElementById('add-workshop-form').addEventListener('submit', handleAddWorkshopFormSubmit);
+            document.getElementById('about-form').addEventListener('submit', handleAboutFormSubmit);
+            document.getElementById('add-translation-btn').addEventListener('click', handleAddTranslation);
+            
+            // Edit form submissions
+            document.getElementById('edit-service-form').addEventListener('submit', function(e) {
+                // The handler is already attached, so we just prevent default if needed
+            });
+            document.getElementById('edit-automation-form').addEventListener('submit', function(e) {
+                // The handler is already attached, so we just prevent default if needed
+            });
+            document.getElementById('edit-workshop-form').addEventListener('submit', function(e) {
+                // The handler is already attached, so we just prevent default if needed
+            });
+            
+            // Add feature buttons for edit forms
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('add-feature-btn')) {
+                    // Check if it's in an edit form
+                    if (e.target.closest('#edit-service-form-container')) {
+                        const lang = e.target.getAttribute('data-lang');
+                        const container = document.getElementById(`edit-service-features-${lang}`);
+                        const featureItem = document.createElement('div');
+                        featureItem.className = 'feature-item';
+                        featureItem.innerHTML = `
+                            <input type="text" placeholder="Feature">
+                            <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                        `;
+                        container.appendChild(featureItem);
+                        
+                        // Add event listener to the new remove button
+                        featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                            if (container.children.length > 1) {
+                                container.removeChild(featureItem);
+                            } else {
+                                featureItem.querySelector('input').value = '';
+                            }
+                        });
+                    }
+                }
+                
+                // Handle remove feature buttons
+                if (e.target && e.target.classList.contains('remove-feature-btn')) {
+                    const featureItem = e.target.closest('.feature-item');
+                    const container = featureItem.parentElement;
+                    
+                    // Check if it's in an edit form
+                    if (container.id && (container.id.includes('edit-service-features'))) {
+                        if (container.children.length > 1) {
+                            container.removeChild(featureItem);
+                        } else {
+                            featureItem.querySelector('input').value = '';
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Setup edit form language tabs
+        function setupEditFormLanguageTabs() {
+            // Edit service form language tabs
+            document.querySelectorAll('#edit-service-form-container .language-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const parent = this.closest('#edit-service-form-container');
+                    
+                    // Remove active class from all tabs in this section
+                    parent.querySelectorAll('.language-tab').forEach(t => t.classList.remove('active'));
+                    parent.querySelectorAll('.language-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    parent.querySelectorAll(`.language-content[data-lang="${lang}"]`).forEach(c => {
+                        c.classList.add('active');
+                        c.style.display = 'block';
+                    });
+                    
+                    // Hide other content
+                    parent.querySelectorAll(`.language-content:not([data-lang="${lang}"])`).forEach(c => {
+                        c.style.display = 'none';
+                    });
+                });
+            });
+            
+            // Edit automation form language tabs
+            document.querySelectorAll('#edit-automation-form-container .language-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const parent = this.closest('#edit-automation-form-container');
+                    
+                    // Remove active class from all tabs in this section
+                    parent.querySelectorAll('.language-tab').forEach(t => t.classList.remove('active'));
+                    parent.querySelectorAll('.language-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    parent.querySelectorAll(`.language-content[data-lang="${lang}"]`).forEach(c => {
+                        c.classList.add('active');
+                        c.style.display = 'block';
+                    });
+                    
+                    // Hide other content
+                    parent.querySelectorAll(`.language-content:not([data-lang="${lang}"])`).forEach(c => {
+                        c.style.display = 'none';
+                    });
+                });
+            });
+            
+            // Edit workshop form language tabs
+            document.querySelectorAll('#edit-workshop-form-container .language-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const parent = this.closest('#edit-workshop-form-container');
+                    
+                    // Remove active class from all tabs in this section
+                    parent.querySelectorAll('.language-tab').forEach(t => t.classList.remove('active'));
+                    parent.querySelectorAll('.language-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    parent.querySelectorAll(`.language-content[data-lang="${lang}"]`).forEach(c => {
+                        c.classList.add('active');
+                        c.style.display = 'block';
+                    });
+                    
+                    // Hide other content
+                    parent.querySelectorAll(`.language-content:not([data-lang="${lang}"])`).forEach(c => {
+                        c.style.display = 'none';
+                    });
+                });
+            });
+        }
+        
+        // Load website content
+        async function loadWebsiteContent() {
+            try {
+                const response = await fetch('/api/content');
+                const content = await response.json();
+                
+                // Populate hero section form (English)
+                document.getElementById('hero-title-en').value = content.hero.title;
+                document.getElementById('hero-subtitle-en').value = content.hero.subtitle;
+                document.getElementById('hero-cta1-en').value = content.hero.cta1;
+                document.getElementById('hero-cta2-en').value = content.hero.cta2;
+                
+                // Populate about section form (English)
+                document.getElementById('about-title-en').value = content.about.title;
+                document.getElementById('about-desc-en').value = content.about.desc;
+                
+                // Load dynamic content
+                loadServices();
+                loadAutomations();
+                loadWorkshops();
+                
+            } catch (error) {
+                console.error('Error loading website content:', error);
+            }
+        }
+        
+        // Load translations
+        async function loadTranslations() {
+            try {
+                const response = await fetch('/api/translations');
+                const translations = await response.json();
+                
+                // Populate hero section form (German)
+                document.getElementById('hero-title-de').value = translations.de['hero.title'] || '';
+                document.getElementById('hero-subtitle-de').value = translations.de['hero.subtitle'] || '';
+                document.getElementById('hero-cta1-de').value = translations.de['hero.cta1'] || '';
+                document.getElementById('hero-cta2-de').value = translations.de['hero.cta2'] || '';
+                
+                // Populate about section form (German)
+                document.getElementById('about-title-de').value = translations.de['about.title'] || '';
+                document.getElementById('about-desc-de').value = translations.de['about.desc'] || '';
+                
+                // Load translations list
+                loadTranslationsList(translations);
+                
+            } catch (error) {
+                console.error('Error loading translations:', error);
+            }
+        }
+        
+        // Load services
+        async function loadServices() {
+            try {
+                const response = await fetch('/api/content');
+                const content = await response.json();
+                
+                const servicesList = document.getElementById('services-list');
+                
+                if (!content.services.items || content.services.items.length === 0) {
+                    servicesList.innerHTML = '<p>No services found.</p>';
+                    return;
+                }
+                
+                let html = '';
+                content.services.items.forEach(service => {
+                    html += `
+                        <div class="dynamic-item" data-id="${service.id}">
+                            <div class="dynamic-item-header">
+                                <div class="dynamic-item-title">${service.title}</div>
+                                <div>
+                                    <button class="btn btn-secondary edit-item-btn" data-type="service" data-id="${service.id}" style="margin-right: 0.5rem;">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-danger remove-item-btn" data-type="service" data-id="${service.id}">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>ID:</strong> ${service.id}</p>
+                            <p><strong>Icon:</strong> ${service.icon}</p>
+                            <p><strong>Description:</strong> ${service.desc}</p>
+                            ${service.features ? `
+                                <p><strong>Features:</strong></p>
+                                <ul class="features-list">
+                                    ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+                                </ul>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                
+                servicesList.innerHTML = html;
+                
+                // Add event listeners to edit and remove buttons
+                document.querySelectorAll('.edit-item-btn[data-type="service"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const serviceId = this.getAttribute('data-id');
+                        editService(serviceId);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item-btn[data-type="service"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const serviceId = this.getAttribute('data-id');
+                        removeService(serviceId);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading services:', error);
+                document.getElementById('services-list').innerHTML = '<p>Error loading services.</p>';
+            }
+        }
+        
+        // Load automations
+        async function loadAutomations() {
+            try {
+                const response = await fetch('/api/content');
+                const content = await response.json();
+                
+                const automationsList = document.getElementById('automations-list');
+                
+                if (!content.automation.items || content.automation.items.length === 0) {
+                    automationsList.innerHTML = '<p>No automations found.</p>';
+                    return;
+                }
+                
+                let html = '';
+                content.automation.items.forEach(automation => {
+                    html += `
+                        <div class="dynamic-item" data-id="${automation.id}">
+                            <div class="dynamic-item-header">
+                                <div class="dynamic-item-title">${automation.title}</div>
+                                <div>
+                                    <button class="btn btn-secondary edit-item-btn" data-type="automation" data-id="${automation.id}" style="margin-right: 0.5rem;">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-danger remove-item-btn" data-type="automation" data-id="${automation.id}">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>ID:</strong> ${automation.id}</p>
+                            <p><strong>Icon:</strong> ${automation.icon}</p>
+                            <p><strong>Description:</strong> ${automation.desc}</p>
+                        </div>
+                    `;
+                });
+                
+                automationsList.innerHTML = html;
+                
+                // Add event listeners to edit and remove buttons
+                document.querySelectorAll('.edit-item-btn[data-type="automation"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const automationId = this.getAttribute('data-id');
+                        editAutomation(automationId);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item-btn[data-type="automation"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const automationId = this.getAttribute('data-id');
+                        removeAutomation(automationId);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading automations:', error);
+                document.getElementById('automations-list').innerHTML = '<p>Error loading automations.</p>';
+            }
+        }
+        
+        // Load workshops
+        async function loadWorkshops() {
+            try {
+                const response = await fetch('/api/content');
+                const content = await response.json();
+                
+                const workshopsList = document.getElementById('workshops-list');
+                
+                if (!content.workshops.items || content.workshops.items.length === 0) {
+                    workshopsList.innerHTML = '<p>No workshops found.</p>';
+                    return;
+                }
+                
+                let html = '';
+                content.workshops.items.forEach(workshop => {
+                    html += `
+                        <div class="dynamic-item" data-id="${workshop.id}">
+                            <div class="dynamic-item-header">
+                                <div class="dynamic-item-title">${workshop.title}</div>
+                                <div>
+                                    <button class="btn btn-secondary edit-item-btn" data-type="workshop" data-id="${workshop.id}" style="margin-right: 0.5rem;">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-danger remove-item-btn" data-type="workshop" data-id="${workshop.id}">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>ID:</strong> ${workshop.id}</p>
+                            <p><strong>Date:</strong> ${workshop.date.day} ${workshop.date.month}</p>
+                            <p><strong>Description:</strong> ${workshop.desc}</p>
+                            ${workshop.meta ? `
+                                <p><strong>Duration:</strong> ${workshop.meta.duration}</p>
+                                <p><strong>Participants:</strong> ${workshop.meta.participants}</p>
+                                <p><strong>Spots:</strong> ${workshop.meta.spots}</p>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                
+                workshopsList.innerHTML = html;
+                
+                // Add event listeners to edit and remove buttons
+                document.querySelectorAll('.edit-item-btn[data-type="workshop"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const workshopId = this.getAttribute('data-id');
+                        editWorkshop(workshopId);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item-btn[data-type="workshop"]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const workshopId = this.getAttribute('data-id');
+                        removeWorkshop(workshopId);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading workshops:', error);
+                document.getElementById('workshops-list').innerHTML = '<p>Error loading workshops.</p>';
+            }
+        }
+        
+        // Load translations list
+        function loadTranslationsList(translations) {
+            const translationsList = document.getElementById('translations-list');
+            const language = document.getElementById('translation-language').value;
+            
+            if (!translations[language]) {
+                translationsList.innerHTML = '<p>No translations found for selected language.</p>';
+                return;
+            }
+            
+            let html = '';
+            Object.keys(translations[language]).forEach(key => {
+                const value = translations[language][key];
+                html += `
+                    <div class="translation-key" data-key="${key}">
+                        <div class="translation-key-input">
+                            <input type="text" value="${key}" readonly>
+                        </div>
+                        <div class="translation-key-value">
+                            <input type="text" value="${value}" data-key="${key}" data-lang="${language}">
+                        </div>
+                        <div class="translation-key-actions">
+                            <button class="btn btn-danger remove-translation-btn" data-key="${key}" data-lang="${language}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            translationsList.innerHTML = html;
+            
+            // Add event listeners for translation updates
+            document.querySelectorAll('.translation-key-value input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const key = this.getAttribute('data-key');
+                    const lang = this.getAttribute('data-lang');
+                    const value = this.value;
+                    updateTranslation(lang, key, value);
+                });
+            });
+            
+            // Add event listeners for translation removal
+            document.querySelectorAll('.remove-translation-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const key = this.getAttribute('data-key');
+                    const lang = this.getAttribute('data-lang');
+                    removeTranslation(lang, key);
+                });
+            });
+        }
+        
+        // Handle hero form submission
+        async function handleHeroFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get English values
+            const heroData = {
+                hero: {
+                    title: document.getElementById('hero-title-en').value,
+                    subtitle: document.getElementById('hero-subtitle-en').value,
+                    cta1: document.getElementById('hero-cta1-en').value,
+                    cta2: document.getElementById('hero-cta2-en').value
+                }
+            };
+            
+            // Get German values
+            const germanTranslations = {
+                de: {
+                    'hero.title': document.getElementById('hero-title-de').value,
+                    'hero.subtitle': document.getElementById('hero-subtitle-de').value,
+                    'hero.cta1': document.getElementById('hero-cta1-de').value,
+                    'hero.cta2': document.getElementById('hero-cta2-de').value
+                }
+            };
+            
+            // Update content
+            await updateContent(heroData, 'hero-message');
+            
+            // Update translations
+            await updateTranslations(germanTranslations, 'hero-message');
+        }
+        
+        // Handle add service form submission
+        async function handleAddServiceFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const serviceId = document.getElementById('new-service-id').value;
+            const serviceIcon = document.getElementById('new-service-icon').value;
+            const serviceTitleEn = document.getElementById('new-service-title-en').value;
+            const serviceDescEn = document.getElementById('new-service-desc-en').value;
+            const serviceTitleDe = document.getElementById('new-service-title-de').value;
+            const serviceDescDe = document.getElementById('new-service-desc-de').value;
+            
+            // Get features for both languages
+            const featuresEn = [];
+            document.querySelectorAll('#new-service-features-en .feature-item input').forEach(input => {
+                if (input.value.trim()) {
+                    featuresEn.push(input.value.trim());
+                }
+            });
+            
+            const featuresDe = [];
+            document.querySelectorAll('#new-service-features-de .feature-item input').forEach(input => {
+                if (input.value.trim()) {
+                    featuresDe.push(input.value.trim());
+                }
+            });
+            
+            if (!serviceId || !serviceTitleEn || !serviceTitleDe) {
+                showMessage('services-message', 'Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Create service object
+            const newService = {
+                id: serviceId,
+                icon: serviceIcon,
+                title: serviceTitleEn,
+                desc: serviceDescEn,
+                features: featuresEn
+            };
+            
+            try {
+                const response = await fetch('/api/services', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newService)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('services-message', 'Service added successfully!', 'success');
+                    
+                    // Clear form
+                    document.getElementById('add-service-form').reset();
+                    document.querySelector('#new-service-features-en').innerHTML = '<div class="feature-item"><input type="text" placeholder="Feature 1"><button type="button" class="btn btn-danger remove-feature-btn">-</button></div>';
+                    document.querySelector('#new-service-features-de').innerHTML = '<div class="feature-item"><input type="text" placeholder="Feature 1"><button type="button" class="btn btn-danger remove-feature-btn">-</button></div>';
+                    
+                    // Reload services
+                    loadServices();
+                    
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`services.${serviceId}.title`]: serviceTitleEn,
+                            [`services.${serviceId}.desc`]: serviceDescEn
+                        },
+                        de: {
+                            [`services.${serviceId}.title`]: serviceTitleDe,
+                            [`services.${serviceId}.desc`]: serviceDescDe
+                        }
+                    };
+                    
+                    // Add feature translations
+                    featuresEn.forEach((feature, index) => {
+                        translations.en[`services.${serviceId}.feature${index + 1}`] = feature;
+                    });
+                    
+                    featuresDe.forEach((feature, index) => {
+                        translations.de[`services.${serviceId}.feature${index + 1}`] = feature;
+                    });
+                    
+                    await updateTranslations(translations, 'services-message');
+                } else {
+                    showMessage('services-message', 'Error adding service: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding service:', error);
+                showMessage('services-message', 'Error adding service. Please try again.', 'error');
+            }
+        }
+        
+        // Handle add automation form submission
+        async function handleAddAutomationFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const automationId = document.getElementById('new-automation-id').value;
+            const automationIcon = document.getElementById('new-automation-icon').value;
+            const automationTitleEn = document.getElementById('new-automation-title-en').value;
+            const automationDescEn = document.getElementById('new-automation-desc-en').value;
+            const automationTitleDe = document.getElementById('new-automation-title-de').value;
+            const automationDescDe = document.getElementById('new-automation-desc-de').value;
+            
+            if (!automationId || !automationTitleEn || !automationTitleDe) {
+                showMessage('automation-message', 'Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Create automation object
+            const newAutomation = {
+                id: automationId,
+                icon: automationIcon,
+                title: automationTitleEn,
+                desc: automationDescEn
+            };
+            
+            try {
+                const response = await fetch('/api/automations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newAutomation)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('automation-message', 'Automation added successfully!', 'success');
+                    
+                    // Clear form
+                    document.getElementById('add-automation-form').reset();
+                    
+                    // Reload automations
+                    loadAutomations();
+                    
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`automation.${automationId}`]: automationTitleEn,
+                            [`automation.${automationId}.desc`]: automationDescEn
+                        },
+                        de: {
+                            [`automation.${automationId}`]: automationTitleDe,
+                            [`automation.${automationId}.desc`]: automationDescDe
+                        }
+                    };
+                    
+                    await updateTranslations(translations, 'automation-message');
+                } else {
+                    showMessage('automation-message', 'Error adding automation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding automation:', error);
+                showMessage('automation-message', 'Error adding automation. Please try again.', 'error');
+            }
+        }
+        
+        // Handle add workshop form submission
+        async function handleAddWorkshopFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const workshopId = document.getElementById('new-workshop-id').value;
+            const workshopDay = document.getElementById('new-workshop-day').value;
+            const workshopMonth = document.getElementById('new-workshop-month').value;
+            const workshopTitleEn = document.getElementById('new-workshop-title-en').value;
+            const workshopDescEn = document.getElementById('new-workshop-desc-en').value;
+            const workshopDurationEn = document.getElementById('new-workshop-duration-en').value;
+            const workshopParticipantsEn = document.getElementById('new-workshop-participants-en').value;
+            const workshopSpotsEn = document.getElementById('new-workshop-spots-en').value;
+            const workshopTitleDe = document.getElementById('new-workshop-title-de').value;
+            const workshopDescDe = document.getElementById('new-workshop-desc-de').value;
+            const workshopDurationDe = document.getElementById('new-workshop-duration-de').value;
+            const workshopParticipantsDe = document.getElementById('new-workshop-participants-de').value;
+            const workshopSpotsDe = document.getElementById('new-workshop-spots-de').value;
+            
+            if (!workshopId || !workshopTitleEn || !workshopTitleDe) {
+                showMessage('workshops-message', 'Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Create workshop object
+            const newWorkshop = {
+                id: workshopId,
+                date: {
+                    day: workshopDay,
+                    month: workshopMonth
+                },
+                title: workshopTitleEn,
+                desc: workshopDescEn,
+                meta: {
+                    duration: workshopDurationEn,
+                    participants: workshopParticipantsEn,
+                    spots: workshopSpotsEn
+                }
+            };
+            
+            try {
+                const response = await fetch('/api/workshops', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newWorkshop)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('workshops-message', 'Workshop added successfully!', 'success');
+                    
+                    // Clear form
+                    document.getElementById('add-workshop-form').reset();
+                    
+                    // Reload workshops
+                    loadWorkshops();
+                    
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`workshops.${workshopId}.title`]: workshopTitleEn,
+                            [`workshops.${workshopId}.desc`]: workshopDescEn,
+                            [`workshops.${workshopId}.duration`]: workshopDurationEn,
+                            [`workshops.${workshopId}.participants`]: workshopParticipantsEn,
+                            [`workshops.${workshopId}.spots`]: workshopSpotsEn
+                        },
+                        de: {
+                            [`workshops.${workshopId}.title`]: workshopTitleDe,
+                            [`workshops.${workshopId}.desc`]: workshopDescDe,
+                            [`workshops.${workshopId}.duration`]: workshopDurationDe,
+                            [`workshops.${workshopId}.participants`]: workshopParticipantsDe,
+                            [`workshops.${workshopId}.spots`]: workshopSpotsDe
+                        }
+                    };
+                    
+                    await updateTranslations(translations, 'workshops-message');
+                } else {
+                    showMessage('workshops-message', 'Error adding workshop: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding workshop:', error);
+                showMessage('workshops-message', 'Error adding workshop. Please try again.', 'error');
+            }
+        }
+        
+        // Handle hero form submission
+        async function handleHeroFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get English values
+            const heroData = {
+                hero: {
+                    title: document.getElementById('hero-title-en').value,
+                    subtitle: document.getElementById('hero-subtitle-en').value,
+                    cta1: document.getElementById('hero-cta1-en').value,
+                    cta2: document.getElementById('hero-cta2-en').value
+                }
+            };
+            
+            // Get German translations
+            const germanTranslations = {
+                de: {
+                    'hero.title': document.getElementById('hero-title-de').value,
+                    'hero.subtitle': document.getElementById('hero-subtitle-de').value,
+                    'hero.cta1': document.getElementById('hero-cta1-de').value,
+                    'hero.cta2': document.getElementById('hero-cta2-de').value
+                }
+            };
+            
+            try {
+                // Update content
+                const response = await fetch('/api/content', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(heroData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('hero-message', 'Hero section updated successfully!', 'success');
+                    
+                    // Also update translations
+                    await updateTranslations(germanTranslations, 'hero-message');
+                } else {
+                    showMessage('hero-message', 'Error updating hero section: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating hero section:', error);
+                showMessage('hero-message', 'Error updating hero section. Please try again.', 'error');
+            }
+        }
+        
+        // Handle about form submission
+        async function handleAboutFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get English values
+            const aboutData = {
+                about: {
+                    title: document.getElementById('about-title-en').value,
+                    desc: document.getElementById('about-desc-en').value
+                }
+            };
+            
+            // Get German values
+            const germanTranslations = {
+                de: {
+                    'about.title': document.getElementById('about-title-de').value,
+                    'about.desc': document.getElementById('about-desc-de').value
+                }
+            };
+            
+            // Update content
+            await updateContent(aboutData, 'about-message');
+            
+            // Update translations
+            await updateTranslations(germanTranslations, 'about-message');
+        }
+        
+        // Handle add translation
+        async function handleAddTranslation() {
+            const language = document.getElementById('translation-language').value;
+            const key = document.getElementById('new-translation-key').value;
+            const value = document.getElementById('new-translation-value').value;
+            
+            if (!key || !value) {
+                showMessage('translations-message', 'Please enter both key and value.', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/translations/key', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ language, key, value })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('translations-message', 'Translation added successfully!', 'success');
+                    document.getElementById('new-translation-key').value = '';
+                    document.getElementById('new-translation-value').value = '';
+                    loadTranslationsList(result.data);
+                } else {
+                    showMessage('translations-message', 'Error adding translation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding translation:', error);
+                showMessage('translations-message', 'Error adding translation. Please try again.', 'error');
+            }
+        }
+        
+        // Remove service
+        async function removeService(serviceId) {
+            if (!confirm('Are you sure you want to remove this service?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/services/${serviceId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('services-message', 'Service removed successfully!', 'success');
+                    loadServices();
+                } else {
+                    showMessage('services-message', 'Error removing service: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error removing service:', error);
+                showMessage('services-message', 'Error removing service. Please try again.', 'error');
+            }
+        }
+        
+        // Remove automation
+        async function removeAutomation(automationId) {
+            if (!confirm('Are you sure you want to remove this automation?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/automations/${automationId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('automation-message', 'Automation removed successfully!', 'success');
+                    loadAutomations();
+                } else {
+                    showMessage('automation-message', 'Error removing automation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error removing automation:', error);
+                showMessage('automation-message', 'Error removing automation. Please try again.', 'error');
+            }
+        }
+        
+        // Remove workshop
+        async function removeWorkshop(workshopId) {
+            if (!confirm('Are you sure you want to remove this workshop?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/workshops/${workshopId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('workshops-message', 'Workshop removed successfully!', 'success');
+                    loadWorkshops();
+                } else {
+                    showMessage('workshops-message', 'Error removing workshop: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error removing workshop:', error);
+                showMessage('workshops-message', 'Error removing workshop. Please try again.', 'error');
+            }
+        }
+        
+        // Update translation
+        async function updateTranslation(language, key, value) {
+            try {
+                const response = await fetch('/api/translations', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ [language]: { [key]: value } })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('translations-message', 'Translation updated successfully!', 'success');
+                } else {
+                    showMessage('translations-message', 'Error updating translation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating translation:', error);
+                showMessage('translations-message', 'Error updating translation. Please try again.', 'error');
+            }
+        }
+        
+        // Remove translation
+        async function removeTranslation(language, key) {
+            try {
+                const response = await fetch('/api/translations/key', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ language, key })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('translations-message', 'Translation removed successfully!', 'success');
+                    loadTranslationsList(result.data);
+                } else {
+                    showMessage('translations-message', 'Error removing translation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error removing translation:', error);
+                showMessage('translations-message', 'Error removing translation. Please try again.', 'error');
+            }
+        }
+        
+        // Load messages data for dashboard
+        async function loadMessagesData() {
+            try {
+                const response = await fetch('/api/contacts');
+                const messages = await response.json();
+                
+                // Update messages count
+                document.getElementById('messages-count').textContent = messages.length;
+                
+                // Show recent messages (last 3)
+                const recentMessagesContainer = document.getElementById('recent-messages');
+                if (messages.length === 0) {
+                    recentMessagesContainer.innerHTML = '<p>No messages found.</p>';
+                    return;
+                }
+                
+                const recentMessages = messages.slice(0, 3);
+                let html = '<div class="messages-table-container"><table class="messages-table">';
+                html += '<thead><tr><th>Name</th><th>Email</th><th>Service</th><th>Date</th></tr></thead><tbody>';
+                
+                recentMessages.forEach(message => {
+                    const date = message.created_at ? new Date(message.created_at).toLocaleDateString() : 'Unknown';
+                    html += `<tr>
+                        <td>${message.name || 'Anonymous'}</td>
+                        <td>${message.email || 'Not provided'}</td>
+                        <td>${message.service || 'Not specified'}</td>
+                        <td>${date}</td>
+                    </tr>`;
+                });
+                
+                html += '</tbody></table></div>';
+                recentMessagesContainer.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error loading messages data:', error);
+                document.getElementById('recent-messages').innerHTML = '<p>Error loading messages.</p>';
+            }
+        }
+        
+        // Load other data for dashboard
+        function loadOtherData() {
+            // For demo purposes, setting static values
+            document.getElementById('workshops-count').textContent = '12';
+            document.getElementById('registrations-count').textContent = '87';
+        }
+        
+        // Load all messages for messages section
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/contacts');
+                const messages = await response.json();
+                
+                const messagesContainer = document.getElementById('messages-content');
+                if (messages.length === 0) {
+                    messagesContainer.innerHTML = '<p>No messages found.</p>';
+                    return;
+                }
+                
+                let html = '<table class="messages-table">';
+                html += '<thead><tr><th>Name</th><th>Email</th><th>Service</th><th>Message</th><th>Date</th></tr></thead><tbody>';
+                
+                messages.forEach(message => {
+                    const date = message.created_at ? new Date(message.created_at).toLocaleString() : 'Unknown';
+                    const messageText = message.message || 'No message';
+                    // Truncate message for display
+                    const truncatedMessage = messageText.length > 100 ? messageText.substring(0, 100) + '...' : messageText;
+                    
+                    html += `<tr>
+                        <td>${message.name || 'Anonymous'}</td>
+                        <td>${message.email || 'Not provided'}</td>
+                        <td>${message.service || 'Not specified'}</td>
+                        <td>${truncatedMessage}</td>
+                        <td>${date}</td>
+                    </tr>`;
+                });
+                
+                html += '</tbody></table>';
+                messagesContainer.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                document.getElementById('messages-content').innerHTML = '<p>Error loading messages.</p>';
+            }
+        }
+        
+        // Update content function
+        async function updateContent(data, messageId) {
+            try {
+                const response = await fetch('/api/content', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(messageId, 'Content updated successfully!', 'success');
+                } else {
+                    showMessage(messageId, 'Error updating content: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating content:', error);
+                showMessage(messageId, 'Error updating content. Please try again.', 'error');
+            }
+        }
+        
+        // Update translations function
+        async function updateTranslations(data, messageId) {
+            try {
+                const response = await fetch('/api/translations', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(messageId, 'Translations updated successfully!', 'success');
+                } else {
+                    showMessage(messageId, 'Error updating translations: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating translations:', error);
+                showMessage(messageId, 'Error updating translations. Please try again.', 'error');
+            }
+        }
+        
+        // Show message function
+        function showMessage(messageId, text, type) {
+            const messageElement = document.getElementById(messageId);
+            messageElement.textContent = text;
+            messageElement.className = 'message ' + type;
+            messageElement.style.display = 'block';
+            
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Update translations list when language changes
+        document.getElementById('translation-language').addEventListener('change', async function() {
+            try {
+                const response = await fetch('/api/translations');
+                const translations = await response.json();
+                loadTranslationsList(translations);
+            } catch (error) {
+                console.error('Error loading translations:', error);
+            }
+        });
+        
+        // Edit service function
+        function editService(serviceId) {
+            // Hide services list and show edit form
+            document.getElementById('services-list').style.display = 'none';
+            document.getElementById('edit-service-form-container').style.display = 'block';
+            
+            // Populate form with service data
+            fetch('/api/content')
+                .then(response => response.json())
+                .then(content => {
+                    const service = content.services.items.find(s => s.id === serviceId);
+                    if (service) {
+                        document.getElementById('edit-service-id').value = service.id;
+                        document.getElementById('edit-service-icon').value = service.icon || '';
+                        document.getElementById('edit-service-title-en').value = service.title || '';
+                        document.getElementById('edit-service-desc-en').value = service.desc || '';
+                        
+                        // Clear and populate features for English
+                        const featuresEnContainer = document.getElementById('edit-service-features-en');
+                        featuresEnContainer.innerHTML = '';
+                        if (service.features && service.features.length > 0) {
+                            service.features.forEach(feature => {
+                                const featureItem = document.createElement('div');
+                                featureItem.className = 'feature-item';
+                                featureItem.innerHTML = `
+                                    <input type="text" value="${feature}" placeholder="Feature">
+                                    <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                `;
+                                featuresEnContainer.appendChild(featureItem);
+                                
+                                // Add event listener to the new remove button
+                                featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                                    if (featuresEnContainer.children.length > 1) {
+                                        featuresEnContainer.removeChild(featureItem);
+                                    } else {
+                                        featureItem.querySelector('input').value = '';
+                                    }
+                                });
+                            });
+                        } else {
+                            const featureItem = document.createElement('div');
+                            featureItem.className = 'feature-item';
+                            featureItem.innerHTML = `
+                                <input type="text" placeholder="Feature">
+                                <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                            `;
+                            featuresEnContainer.appendChild(featureItem);
+                            
+                            // Add event listener to the new remove button
+                            featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                                if (featuresEnContainer.children.length > 1) {
+                                    featuresEnContainer.removeChild(featureItem);
+                                } else {
+                                    featureItem.querySelector('input').value = '';
+                                }
+                            });
+                        }
+                        
+                        // Get German translations for the service
+                        fetch('/api/translations')
+                            .then(response => response.json())
+                            .then(translations => {
+                                if (translations.de && translations.de[`services.${serviceId}.title`]) {
+                                    document.getElementById('edit-service-title-de').value = translations.de[`services.${serviceId}.title`];
+                                }
+                                if (translations.de && translations.de[`services.${serviceId}.desc`]) {
+                                    document.getElementById('edit-service-desc-de').value = translations.de[`services.${serviceId}.desc`];
+                                }
+                                
+                                // Clear and populate features for German
+                                const featuresDeContainer = document.getElementById('edit-service-features-de');
+                                featuresDeContainer.innerHTML = '';
+                                
+                                // Get German feature translations
+                                const germanFeatures = [];
+                                let featureIndex = 1;
+                                while (translations.de && translations.de[`services.${serviceId}.feature${featureIndex}`]) {
+                                    germanFeatures.push(translations.de[`services.${serviceId}.feature${featureIndex}`]);
+                                    featureIndex++;
+                                }
+                                
+                                if (germanFeatures.length > 0) {
+                                    germanFeatures.forEach(feature => {
+                                        const featureItem = document.createElement('div');
+                                        featureItem.className = 'feature-item';
+                                        featureItem.innerHTML = `
+                                            <input type="text" value="${feature}" placeholder="Feature">
+                                            <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                        `;
+                                        featuresDeContainer.appendChild(featureItem);
+                                        
+                                        // Add event listener to the new remove button
+                                        featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                                            if (featuresDeContainer.children.length > 1) {
+                                                featuresDeContainer.removeChild(featureItem);
+                                            } else {
+                                                featureItem.querySelector('input').value = '';
+                                            }
+                                        });
+                                    });
+                                } else {
+                                    const featureItem = document.createElement('div');
+                                    featureItem.className = 'feature-item';
+                                    featureItem.innerHTML = `
+                                        <input type="text" placeholder="Feature">
+                                        <button type="button" class="btn btn-danger remove-feature-btn">-</button>
+                                    `;
+                                    featuresDeContainer.appendChild(featureItem);
+                                    
+                                    // Add event listener to the new remove button
+                                    featureItem.querySelector('.remove-feature-btn').addEventListener('click', function() {
+                                        if (featuresDeContainer.children.length > 1) {
+                                            featuresDeContainer.removeChild(featureItem);
+                                        } else {
+                                            featureItem.querySelector('input').value = '';
+                                        }
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error loading German translations:', error);
+                            });
+                        
+                        // Event listeners for add feature buttons in edit form will be handled globally
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading service data:', error);
+                    showMessage('services-message', 'Error loading service data. Please try again.', 'error');
+                });
+        }
+        
+        // Edit automation function
+        function editAutomation(automationId) {
+            // Hide automations list and show edit form
+            document.getElementById('automations-list').style.display = 'none';
+            document.getElementById('edit-automation-form-container').style.display = 'block';
+            
+            // Populate form with automation data
+            fetch('/api/content')
+                .then(response => response.json())
+                .then(content => {
+                    const automation = content.automation.items.find(a => a.id === automationId);
+                    if (automation) {
+                        document.getElementById('edit-automation-id').value = automation.id;
+                        document.getElementById('edit-automation-icon').value = automation.icon || '';
+                        document.getElementById('edit-automation-title-en').value = automation.title || '';
+                        document.getElementById('edit-automation-desc-en').value = automation.desc || '';
+                        
+                        // Get German translations for the automation
+                        fetch('/api/translations')
+                            .then(response => response.json())
+                            .then(translations => {
+                                if (translations.de && translations.de[`automation.${automationId}`]) {
+                                    document.getElementById('edit-automation-title-de').value = translations.de[`automation.${automationId}`];
+                                }
+                                if (translations.de && translations.de[`automation.${automationId}.desc`]) {
+                                    document.getElementById('edit-automation-desc-de').value = translations.de[`automation.${automationId}.desc`];
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error loading German translations:', error);
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading automation data:', error);
+                    showMessage('automation-message', 'Error loading automation data. Please try again.', 'error');
+                });
+        }
+        
+        // Edit workshop function
+        function editWorkshop(workshopId) {
+            // Hide workshops list and show edit form
+            document.getElementById('workshops-list').style.display = 'none';
+            document.getElementById('edit-workshop-form-container').style.display = 'block';
+            
+            // Populate form with workshop data
+            fetch('/api/content')
+                .then(response => response.json())
+                .then(content => {
+                    const workshop = content.workshops.items.find(w => w.id === workshopId);
+                    if (workshop) {
+                        document.getElementById('edit-workshop-id').value = workshop.id;
+                        document.getElementById('edit-workshop-day').value = workshop.date ? workshop.date.day : '';
+                        document.getElementById('edit-workshop-month').value = workshop.date ? workshop.date.month : '';
+                        document.getElementById('edit-workshop-title-en').value = workshop.title || '';
+                        document.getElementById('edit-workshop-desc-en').value = workshop.desc || '';
+                        
+                        if (workshop.meta) {
+                            document.getElementById('edit-workshop-duration-en').value = workshop.meta.duration || '';
+                            document.getElementById('edit-workshop-participants-en').value = workshop.meta.participants || '';
+                            document.getElementById('edit-workshop-spots-en').value = workshop.meta.spots || '';
+                        }
+                        
+                        // Get German translations for the workshop
+                        fetch('/api/translations')
+                            .then(response => response.json())
+                            .then(translations => {
+                                if (translations.de && translations.de[`workshops.${workshopId}.title`]) {
+                                    document.getElementById('edit-workshop-title-de').value = translations.de[`workshops.${workshopId}.title`];
+                                }
+                                if (translations.de && translations.de[`workshops.${workshopId}.desc`]) {
+                                    document.getElementById('edit-workshop-desc-de').value = translations.de[`workshops.${workshopId}.desc`];
+                                }
+                                if (translations.de && translations.de[`workshops.${workshopId}.duration`]) {
+                                    document.getElementById('edit-workshop-duration-de').value = translations.de[`workshops.${workshopId}.duration`];
+                                }
+                                if (translations.de && translations.de[`workshops.${workshopId}.participants`]) {
+                                    document.getElementById('edit-workshop-participants-de').value = translations.de[`workshops.${workshopId}.participants`];
+                                }
+                                if (translations.de && translations.de[`workshops.${workshopId}.spots`]) {
+                                    document.getElementById('edit-workshop-spots-de').value = translations.de[`workshops.${workshopId}.spots`];
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error loading German translations:', error);
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading workshop data:', error);
+                    showMessage('workshops-message', 'Error loading workshop data. Please try again.', 'error');
+                });
+        }
+        
+        // Cancel edit service
+        document.getElementById('cancel-edit-service').addEventListener('click', function() {
+            document.getElementById('edit-service-form-container').style.display = 'none';
+            document.getElementById('services-list').style.display = 'block';
+            document.getElementById('edit-service-form').reset();
+        });
+        
+        // Cancel edit automation
+        document.getElementById('cancel-edit-automation').addEventListener('click', function() {
+            document.getElementById('edit-automation-form-container').style.display = 'none';
+            document.getElementById('automations-list').style.display = 'block';
+            document.getElementById('edit-automation-form').reset();
+        });
+        
+        // Cancel edit workshop
+        document.getElementById('cancel-edit-workshop').addEventListener('click', function() {
+            document.getElementById('edit-workshop-form-container').style.display = 'none';
+            document.getElementById('workshops-list').style.display = 'block';
+            document.getElementById('edit-workshop-form').reset();
+        });
+        
+        // Handle edit service form submission
+        document.getElementById('edit-service-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const serviceId = document.getElementById('edit-service-id').value;
+            
+            // Get form values
+            const serviceIcon = document.getElementById('edit-service-icon').value;
+            const serviceTitleEn = document.getElementById('edit-service-title-en').value;
+            const serviceDescEn = document.getElementById('edit-service-desc-en').value;
+            const serviceTitleDe = document.getElementById('edit-service-title-de').value;
+            const serviceDescDe = document.getElementById('edit-service-desc-de').value;
+            
+            // Get features for English
+            const featuresEn = [];
+            document.querySelectorAll('#edit-service-features-en .feature-item input').forEach(input => {
+                if (input.value.trim()) {
+                    featuresEn.push(input.value.trim());
+                }
+            });
+            
+            // Get features for German
+            const featuresDe = [];
+            document.querySelectorAll('#edit-service-features-de .feature-item input').forEach(input => {
+                if (input.value.trim()) {
+                    featuresDe.push(input.value.trim());
+                }
+            });
+            
+            // Create updated service object
+            const updatedService = {
+                id: serviceId,
+                icon: serviceIcon,
+                title: serviceTitleEn,
+                desc: serviceDescEn,
+                features: featuresEn
+            };
+            
+            try {
+                const response = await fetch(`/api/services/${serviceId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedService)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`services.${serviceId}.title`]: serviceTitleEn,
+                            [`services.${serviceId}.desc`]: serviceDescEn
+                        },
+                        de: {
+                            [`services.${serviceId}.title`]: serviceTitleDe,
+                            [`services.${serviceId}.desc`]: serviceDescDe
+                        }
+                    };
+                    
+                    // Add feature translations
+                    featuresEn.forEach((feature, index) => {
+                        translations.en[`services.${serviceId}.feature${index + 1}`] = feature;
+                    });
+                    
+                    featuresDe.forEach((feature, index) => {
+                        translations.de[`services.${serviceId}.feature${index + 1}`] = feature;
+                    });
+                    
+                    await updateTranslations(translations, 'services-message');
+                    
+                    showMessage('services-message', 'Service updated successfully!', 'success');
+                    
+                    // Hide edit form and show services list
+                    document.getElementById('edit-service-form-container').style.display = 'none';
+                    document.getElementById('services-list').style.display = 'block';
+                    
+                    // Reload services
+                    loadServices();
+                } else {
+                    showMessage('services-message', 'Error updating service: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating service:', error);
+                showMessage('services-message', 'Error updating service. Please try again.', 'error');
+            }
+        });
+        
+        // Handle edit automation form submission
+        document.getElementById('edit-automation-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const automationId = document.getElementById('edit-automation-id').value;
+            
+            // Get form values
+            const automationIcon = document.getElementById('edit-automation-icon').value;
+            const automationTitleEn = document.getElementById('edit-automation-title-en').value;
+            const automationDescEn = document.getElementById('edit-automation-desc-en').value;
+            const automationTitleDe = document.getElementById('edit-automation-title-de').value;
+            const automationDescDe = document.getElementById('edit-automation-desc-de').value;
+            
+            // Create updated automation object
+            const updatedAutomation = {
+                id: automationId,
+                icon: automationIcon,
+                title: automationTitleEn,
+                desc: automationDescEn
+            };
+            
+            try {
+                const response = await fetch(`/api/automations/${automationId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedAutomation)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`automation.${automationId}`]: automationTitleEn,
+                            [`automation.${automationId}.desc`]: automationDescEn
+                        },
+                        de: {
+                            [`automation.${automationId}`]: automationTitleDe,
+                            [`automation.${automationId}.desc`]: automationDescDe
+                        }
+                    };
+                    
+                    await updateTranslations(translations, 'automation-message');
+                    
+                    showMessage('automation-message', 'Automation updated successfully!', 'success');
+                    
+                    // Hide edit form and show automations list
+                    document.getElementById('edit-automation-form-container').style.display = 'none';
+                    document.getElementById('automations-list').style.display = 'block';
+                    
+                    // Reload automations
+                    loadAutomations();
+                } else {
+                    showMessage('automation-message', 'Error updating automation: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating automation:', error);
+                showMessage('automation-message', 'Error updating automation. Please try again.', 'error');
+            }
+        });
+        
+        // Handle edit workshop form submission
+        document.getElementById('edit-workshop-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const workshopId = document.getElementById('edit-workshop-id').value;
+            
+            // Get form values
+            const workshopDay = document.getElementById('edit-workshop-day').value;
+            const workshopMonth = document.getElementById('edit-workshop-month').value;
+            const workshopTitleEn = document.getElementById('edit-workshop-title-en').value;
+            const workshopDescEn = document.getElementById('edit-workshop-desc-en').value;
+            const workshopDurationEn = document.getElementById('edit-workshop-duration-en').value;
+            const workshopParticipantsEn = document.getElementById('edit-workshop-participants-en').value;
+            const workshopSpotsEn = document.getElementById('edit-workshop-spots-en').value;
+            const workshopTitleDe = document.getElementById('edit-workshop-title-de').value;
+            const workshopDescDe = document.getElementById('edit-workshop-desc-de').value;
+            const workshopDurationDe = document.getElementById('edit-workshop-duration-de').value;
+            const workshopParticipantsDe = document.getElementById('edit-workshop-participants-de').value;
+            const workshopSpotsDe = document.getElementById('edit-workshop-spots-de').value;
+            
+            // Create updated workshop object
+            const updatedWorkshop = {
+                id: workshopId,
+                date: {
+                    day: workshopDay,
+                    month: workshopMonth
+                },
+                title: workshopTitleEn,
+                desc: workshopDescEn,
+                meta: {
+                    duration: workshopDurationEn,
+                    participants: workshopParticipantsEn,
+                    spots: workshopSpotsEn
+                }
+            };
+            
+            try {
+                const response = await fetch(`/api/workshops/${workshopId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedWorkshop)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update translations
+                    const translations = {
+                        en: {
+                            [`workshops.${workshopId}.title`]: workshopTitleEn,
+                            [`workshops.${workshopId}.desc`]: workshopDescEn,
+                            [`workshops.${workshopId}.duration`]: workshopDurationEn,
+                            [`workshops.${workshopId}.participants`]: workshopParticipantsEn,
+                            [`workshops.${workshopId}.spots`]: workshopSpotsEn
+                        },
+                        de: {
+                            [`workshops.${workshopId}.title`]: workshopTitleDe,
+                            [`workshops.${workshopId}.desc`]: workshopDescDe,
+                            [`workshops.${workshopId}.duration`]: workshopDurationDe,
+                            [`workshops.${workshopId}.participants`]: workshopParticipantsDe,
+                            [`workshops.${workshopId}.spots`]: workshopSpotsDe
+                        }
+                    };
+                    
+                    await updateTranslations(translations, 'workshops-message');
+                    
+                    showMessage('workshops-message', 'Workshop updated successfully!', 'success');
+                    
+                    // Hide edit form and show workshops list
+                    document.getElementById('edit-workshop-form-container').style.display = 'none';
+                    document.getElementById('workshops-list').style.display = 'block';
+                    
+                    // Reload workshops
+                    loadWorkshops();
+                } else {
+                    showMessage('workshops-message', 'Error updating workshop: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating workshop:', error);
+                showMessage('workshops-message', 'Error updating workshop. Please try again.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

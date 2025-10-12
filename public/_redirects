@@ -1,0 +1,15 @@
+# Redirects for Netlify
+
+# API routes
+/api/*  /.netlify/functions/app  200
+
+# HTML page routes
+/impressum  /.netlify/functions/app  200
+/datenschutz  /.netlify/functions/app  200
+/abg  /.netlify/functions/app  200
+/admin_dashboard  /.netlify/functions/app  200
+/admin_login  /.netlify/functions/app  200
+/users_messages  /.netlify/functions/app  200
+
+# SPA fallback - redirect all other routes to index
+/*  /.netlify/functions/app  200

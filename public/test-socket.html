@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Connection Test</h1>
+    <p>Connection status: <span id="status">Connecting...</span></p>
+    <p>Last update: <span id="lastUpdate">Never</span></p>
+    
+    <script>
+        const socket = io();
+        
+        socket.on('connect', () => {
+            document.getElementById('status').textContent = 'Connected';
+            document.getElementById('status').style.color = 'green';
+        });
+        
+        socket.on('disconnect', () => {
+            document.getElementById('status').textContent = 'Disconnected';
+            document.getElementById('status').style.color = 'red';
+        });
+        
+        socket.on('contentUpdated', (data) => {
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+            console.log('Content updated:', data);
+        });
+    </script>
+</body>
+</html>
