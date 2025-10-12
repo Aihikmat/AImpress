@@ -143,7 +143,7 @@ font-weight: 300;
 
 
 .title-logo {
-  max-height: 200px;  /* adjust for your layout */
+  max-height: 20px;  /* adjust for your layout */
 }
 
 
@@ -781,7 +781,7 @@ margin-bottom: 1rem;
 }
 
 .logo-img {
-  height: 120px; /* bigger image */
+  height: 40px; /* bigger image */
 }
 
 
@@ -2032,6 +2032,209 @@ padding: 0 1rem;
 
 
 
+
+
+/* Founders Section Styles */
+.founders-section {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 2px solid #eee;
+}
+
+.founders-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.founders-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    margin: 15px auto 0;
+    border-radius: 10px;
+}
+
+.founders-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.founder-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.founder-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
+}
+
+.founder-card:hover::before {
+    transform: scaleX(1);
+}
+
+.founder-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+}
+
+.founder-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.founder-image {
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.founder-card:hover .founder-image {
+    transform: scale(1.1);
+}
+
+.founder-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to top, rgba(102, 126, 234, 0.3) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.founder-card:hover .founder-overlay {
+    opacity: 1;
+}
+
+.founder-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.founder-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.founder-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.founder-bio {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.founder-social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.founder-social a {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.founder-social a:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .founders-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .founder-image-wrapper {
+        height: 300px;
+    }
+
+    .founders-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+    }
+
+    .founders-title {
+        font-size: 1.6rem;
+    }
+
+    .founder-info {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .founder-image-wrapper {
+        height: 250px;
+    }
+
+    .founder-name {
+        font-size: 1.3rem;
+    }
+
+    .founder-title {
+        font-size: 0.9rem;
+    }
+
+    .founder-bio {
+        font-size: 0.9rem;
+    }
+}
 
 
 

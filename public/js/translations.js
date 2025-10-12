@@ -135,6 +135,14 @@ const translations = {
         'about.stat1': 'Clients Served',
         'about.stat2': 'Workshops Delivered',
         'about.stat3': 'Client Satisfaction',
+        // English (en):
+        'about.founders.title': 'Our Founders',
+        'about.founders.cofounder1': 'CEO & Founder',
+        'about.founders.cofounder2': 'CTO & Founder',
+
+        'about.founders.bio1': 'Responsible for personal client relations and the design of customized solutions for businesses.',
+        'about.founders.bio2': 'Keynote speaker, responsible for leading AI workshops and automation, specialist in deep learning.',
+
         
         // Appointment Section
         'appointment.title': 'Book Your Session',
@@ -165,7 +173,7 @@ const translations = {
         'footer.coaching': 'AI Coaching',
         'footer.development': 'AI Development',
         'footer.contact': 'Contact',
-        'footer.email': 'Email: info@aisolutionshub.com',
+        'footer.email': 'Email: info@aimpress.at',
         'footer.phone': 'Phone: +43 676 5250681',
         'footer.location': 'Location:    4020 Linz',
         'footer.rights': 'All rights reserved.'
@@ -254,14 +262,9 @@ const translations = {
         'workshops.workshop3.desc': 'Praktischer Workshop zur Erstellung intelligenter Chatbots für Kundenservice und Lead-Generierung.',
         'workshops.workshop3.duration': '5 Stunden',
         'workshops.workshop3.participants': 'Max. 12 Teilnehmer',
-<<<<<<< HEAD
-=======
-
         'workshops.workshop1.spots': '5 freie Plätze',
-'workshops.workshop2.spots': '3 freie Plätze',
-'workshops.workshop3.spots': '2 freie Plätze',
-        
->>>>>>> 228202a747530908991b9123f5b328b10db70a52
+        'workshops.workshop2.spots': '3 freie Plätze', 
+        'workshops.workshop3.spots': '2 freie Plätze',
         'workshops.register': 'Jetzt anmelden',
 
 
@@ -308,7 +311,12 @@ const translations = {
         'about.stat1': 'Kunden betreut',
         'about.stat2': 'Workshops durchgeführt',
         'about.stat3': 'Kundenzufriedenheit',
-        
+        'about.founders.title': 'Unsere Gründer',
+        'about.founders.cofounder1': 'CEO & Gründer',
+        'about.founders.cofounder2': 'CTO & Gründer',
+
+        'about.founders.bio1': 'Zuständig für die persönliche Kundenbetreuung und die Konzeption maßgeschneiderter Lösungen für Unternehmen.',
+        'about.founders.bio2': 'Keynote Speaker, zuständig für die Leitung der KI-Workshops und Automatisierung, Spezialist für Deep Learning.',      
         // Appointment Section
         'appointment.title': 'Buchen Sie Ihre Sitzung',
         'appointment.ready': 'Bereit zu starten?',
@@ -338,7 +346,7 @@ const translations = {
         'footer.coaching': 'KI-Coaching',
         'footer.development': 'KI-Entwicklung',
         'footer.contact': 'Kontakt',
-        'footer.email': 'E-Mail: info@aisolutionshub.com',
+        'footer.email': 'E-Mail: info@aimpress.at',
         'footer.phone': 'Telefon: +43 676 5250681',
         'footer.location': 'Standort:    4020 Linz',
         'footer.rights': 'Alle Rechte vorbehalten.'
