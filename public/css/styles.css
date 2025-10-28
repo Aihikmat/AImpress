@@ -104,7 +104,16 @@ min-height: 44px;
 .cta-button:hover {
 transform: translateY(-2px);
 box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-color: white !important;
+color: white;
+}
+
+/* Mobile CTA button specific hover styles */
+@media (max-width: 768px) {
+    .nav-link.cta-button:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: translateX(5px) scale(1.05);
+        color: black !important;
+    }
 }
 
 .hamburger {
@@ -1117,6 +1126,12 @@ background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 .nav-link:hover {
     background: rgba(102, 126, 234, 0.1);
     transform: translateX(5px);
+}
+
+/* Ensure proper text color on hover for CTA button in mobile nav */
+.nav-link.cta-button:hover {
+    color: white !important;
+    background: rgba(102, 126, 234, 0.1);
 }
 
 .lang-switch {

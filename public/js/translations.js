@@ -165,7 +165,7 @@ const translations = {
         'footer.coaching': 'AI Coaching',
         'footer.development': 'AI Development',
         'footer.contact': 'Contact',
-        'footer.email': 'Email: info@aimpress.at',
+        'footer.email': 'Email: kontakt@aimpress.at',
         'footer.phone': 'Phone: +43 676 5250681',
         'footer.location': 'Location:    4020 Linz',
         'footer.rights': 'All rights reserved.'
@@ -335,7 +335,7 @@ const translations = {
         'footer.coaching': 'KI-Coaching',
         'footer.development': 'KI-Entwicklung',
         'footer.contact': 'Kontakt',
-        'footer.email': 'E-Mail: info@aimpress.at',
+        'footer.email': 'E-Mail: kontakt@aimpress.at',
         'footer.phone': 'Telefon: +43 676 5250681',
         'footer.location': 'Standort:    4020 Linz',
         'footer.rights': 'Alle Rechte vorbehalten.'
