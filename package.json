@@ -19,7 +19,7 @@
     "express",
     "supabase"
   ],
-  "author": "",
+  "author": "kartar and Hiki",
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
