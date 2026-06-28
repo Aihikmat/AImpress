@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /abg
+
+Sitemap: https://aimpress.at/sitemap.xml
